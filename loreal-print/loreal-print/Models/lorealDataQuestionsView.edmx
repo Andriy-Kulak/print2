@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Loreal_DEVModel2.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="AnswerID" />
+          </Key>
+          <Property Name="AnswerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="BookID" Type="int" Nullable="false" />
+          <Property Name="QuestionID" Type="int" Nullable="false" />
+          <Property Name="AnswerYesNo" Type="varchar" MaxLength="3" />
+          <Property Name="AnswerFreeForm" Type="nvarchar(max)" />
+          <Property Name="VersionID" Type="int" Nullable="false" />
+          <Property Name="Load_Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'LOreal_Print.print_circ_rates.V_QuestionDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="V_QuestionDetails">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="SectionID" />
+            <PropertyRef Name="Section" />
+            <PropertyRef Name="SectionOrder" />
+            <PropertyRef Name="SubSectionID" />
+            <PropertyRef Name="SubSection" />
+            <PropertyRef Name="SubSectionOrder" />
+            <PropertyRef Name="SubSectionToQuestionOrder" />
+            <PropertyRef Name="QuestionID" />
+            <PropertyRef Name="Question" />
+            <PropertyRef Name="IsTopLevel" />
+            <PropertyRef Name="QuestionType" />
+          </Key>
+          <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="SectionID" Type="int" Nullable="false" />
+          <Property Name="Section" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SectionOrder" Type="int" Nullable="false" />
+          <Property Name="SubSectionID" Type="int" Nullable="false" />
+          <Property Name="SubSection" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SubSectionOrder" Type="int" Nullable="false" />
+          <Property Name="SubSectionToQuestionOrder" Type="int" Nullable="false" />
+          <Property Name="QuestionID" Type="int" Nullable="false" />
+          <Property Name="Question" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsTopLevel" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="QuestionType" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="AnswerType" Type="varchar" MaxLength="3" />
+          <Property Name="ParentQuestionID" Type="int" />
+          <Property Name="SubQuestionOrder" Type="int" />
+        </EntityType>
+        <Function Name="GetAnswers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="print_circ_rates">
+          <Parameter Name="Year" Type="varchar" Mode="In" />
+          <Parameter Name="BookID" Type="int" Mode="In" />
+          <Parameter Name="VersionID" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="Loreal_DEVModel2StoreContainer">
+          <EntitySet Name="Answer" EntityType="Self.Answer" Schema="print_circ_rates" store:Type="Tables" />
+          <EntitySet Name="V_QuestionDetails" EntityType="Self.V_QuestionDetails" store:Type="Views" store:Schema="print_circ_rates">
+            <DefiningQuery>SELECT 
+    [V_QuestionDetails].[Year] AS [Year], 
+    [V_QuestionDetails].[SectionID] AS [SectionID], 
+    [V_QuestionDetails].[Section] AS [Section], 
+    [V_QuestionDetails].[SectionOrder] AS [SectionOrder], 
+    [V_QuestionDetails].[SubSectionID] AS [SubSectionID], 
+    [V_QuestionDetails].[SubSection] AS [SubSection], 
+    [V_QuestionDetails].[SubSectionOrder] AS [SubSectionOrder], 
+    [V_QuestionDetails].[SubSectionToQuestionOrder] AS [SubSectionToQuestionOrder], 
+    [V_QuestionDetails].[QuestionID] AS [QuestionID], 
+    [V_QuestionDetails].[Question] AS [Question], 
+    [V_QuestionDetails].[IsTopLevel] AS [IsTopLevel], 
+    [V_QuestionDetails].[QuestionType] AS [QuestionType], 
+    [V_QuestionDetails].[AnswerType] AS [AnswerType], 
+    [V_QuestionDetails].[ParentQuestionID] AS [ParentQuestionID], 
+    [V_QuestionDetails].[SubQuestionOrder] AS [SubQuestionOrder]
+    FROM [print_circ_rates].[V_QuestionDetails] AS [V_QuestionDetails]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Loreal_DEVModel2" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Loreal_DEVEntities3" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="GetAnswers" ReturnType="Collection(Loreal_DEVModel2.GetAnswers_Result)">
+            <Parameter Name="Year" Mode="In" Type="String" />
+            <Parameter Name="BookID" Mode="In" Type="Int32" />
+            <Parameter Name="VersionID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="V_QuestionDetails" EntityType="Loreal_DEVModel2.V_QuestionDetails" />
+          <EntitySet Name="Answers" EntityType="Loreal_DEVModel2.Answer" />
+        </EntityContainer>
+        <ComplexType Name="GetAnswers_Result">
+          <Property Type="String" Name="Year" Nullable="false" MaxLength="4" />
+          <Property Type="Int32" Name="SectionID" Nullable="false" />
+          <Property Type="String" Name="Section" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="SectionOrder" Nullable="false" />
+          <Property Type="Int32" Name="SubSectionID" Nullable="false" />
+          <Property Type="String" Name="SubSection" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="SubSectionOrder" Nullable="false" />
+          <Property Type="Int32" Name="SubSectionToQuestionOrder" Nullable="false" />
+          <Property Type="Int32" Name="QuestionID" Nullable="false" />
+          <Property Type="String" Name="Question" Nullable="false" />
+          <Property Type="String" Name="IsTopLevel" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="QuestionType" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="AnswerType" Nullable="true" MaxLength="3" />
+          <Property Type="Int32" Name="ParentQuestionID" Nullable="true" />
+          <Property Type="Int32" Name="SubQuestionOrder" Nullable="true" />
+          <Property Type="String" Name="AnswerYesNo" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="AnswerFreeForm" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="V_QuestionDetails">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="SectionID" />
+            <PropertyRef Name="Section" />
+            <PropertyRef Name="SectionOrder" />
+            <PropertyRef Name="SubSectionID" />
+            <PropertyRef Name="SubSection" />
+            <PropertyRef Name="SubSectionOrder" />
+            <PropertyRef Name="SubSectionToQuestionOrder" />
+            <PropertyRef Name="QuestionID" />
+            <PropertyRef Name="Question" />
+            <PropertyRef Name="IsTopLevel" />
+            <PropertyRef Name="QuestionType" />
+          </Key>
+          <Property Name="Year" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="SectionID" Type="Int32" Nullable="false" />
+          <Property Name="Section" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SectionOrder" Type="Int32" Nullable="false" />
+          <Property Name="SubSectionID" Type="Int32" Nullable="false" />
+          <Property Name="SubSection" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SubSectionOrder" Type="Int32" Nullable="false" />
+          <Property Name="SubSectionToQuestionOrder" Type="Int32" Nullable="false" />
+          <Property Name="QuestionID" Type="Int32" Nullable="false" />
+          <Property Name="Question" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsTopLevel" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="QuestionType" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="AnswerType" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="ParentQuestionID" Type="Int32" />
+          <Property Name="SubQuestionOrder" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="AnswerID" />
+          </Key>
+          <Property Name="AnswerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Year" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="BookID" Type="Int32" Nullable="false" />
+          <Property Name="QuestionID" Type="Int32" Nullable="false" />
+          <Property Name="AnswerYesNo" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="AnswerFreeForm" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VersionID" Type="Int32" Nullable="false" />
+          <Property Name="Load_Date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Loreal_DEVModel2StoreContainer" CdmEntityContainer="Loreal_DEVEntities3">
+          <FunctionImportMapping FunctionImportName="GetAnswers" FunctionName="Loreal_DEVModel2.Store.GetAnswers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Loreal_DEVModel2.GetAnswers_Result">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="SectionOrder" ColumnName="SectionOrder" />
+                <ScalarProperty Name="SubSectionID" ColumnName="SubSectionID" />
+                <ScalarProperty Name="SubSection" ColumnName="SubSection" />
+                <ScalarProperty Name="SubSectionOrder" ColumnName="SubSectionOrder" />
+                <ScalarProperty Name="SubSectionToQuestionOrder" ColumnName="SubSectionToQuestionOrder" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="IsTopLevel" ColumnName="IsTopLevel" />
+                <ScalarProperty Name="QuestionType" ColumnName="QuestionType" />
+                <ScalarProperty Name="AnswerType" ColumnName="AnswerType" />
+                <ScalarProperty Name="ParentQuestionID" ColumnName="ParentQuestionID" />
+                <ScalarProperty Name="SubQuestionOrder" ColumnName="SubQuestionOrder" />
+                <ScalarProperty Name="AnswerYesNo" ColumnName="AnswerYesNo" />
+                <ScalarProperty Name="AnswerFreeForm" ColumnName="AnswerFreeForm" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="V_QuestionDetails">
+            <EntityTypeMapping TypeName="Loreal_DEVModel2.V_QuestionDetails">
+              <MappingFragment StoreEntitySet="V_QuestionDetails">
+                <ScalarProperty Name="SubQuestionOrder" ColumnName="SubQuestionOrder" />
+                <ScalarProperty Name="ParentQuestionID" ColumnName="ParentQuestionID" />
+                <ScalarProperty Name="AnswerType" ColumnName="AnswerType" />
+                <ScalarProperty Name="QuestionType" ColumnName="QuestionType" />
+                <ScalarProperty Name="IsTopLevel" ColumnName="IsTopLevel" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="SubSectionToQuestionOrder" ColumnName="SubSectionToQuestionOrder" />
+                <ScalarProperty Name="SubSectionOrder" ColumnName="SubSectionOrder" />
+                <ScalarProperty Name="SubSection" ColumnName="SubSection" />
+                <ScalarProperty Name="SubSectionID" ColumnName="SubSectionID" />
+                <ScalarProperty Name="SectionOrder" ColumnName="SectionOrder" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Answers">
+            <EntityTypeMapping TypeName="Loreal_DEVModel2.Answer">
+              <MappingFragment StoreEntitySet="Answer">
+                <ScalarProperty Name="Load_Date" ColumnName="Load_Date" />
+                <ScalarProperty Name="VersionID" ColumnName="VersionID" />
+                <ScalarProperty Name="AnswerFreeForm" ColumnName="AnswerFreeForm" />
+                <ScalarProperty Name="AnswerYesNo" ColumnName="AnswerYesNo" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="AnswerID" ColumnName="AnswerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

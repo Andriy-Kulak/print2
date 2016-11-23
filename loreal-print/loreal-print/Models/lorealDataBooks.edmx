@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Loreal_DEVModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="BookID" />
+          </Key>
+          <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="BookID" Type="int" Nullable="false" />
+          <Property Name="Book" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="GenreID" Type="int" Nullable="false" />
+          <Property Name="PublisherID" Type="int" Nullable="false" />
+          <Property Name="Load_Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookToVersion">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="BookID" />
+            <PropertyRef Name="VersionID" />
+          </Key>
+          <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="BookID" Type="int" Nullable="false" />
+          <Property Name="VersionID" Type="int" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Load_Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="GenreID" Type="int" Nullable="false" />
+          <Property Name="Genre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AvgVerifiedCircPercent" Type="int" Nullable="false" />
+          <Property Name="Load_Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Publisher">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="PublisherID" />
+          </Key>
+          <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="PublisherID" Type="int" Nullable="false" />
+          <Property Name="Publisher" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IsMain" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Load_Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Book_To_Genre_Year_GenreID">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="GenreID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="GenreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Book_To_Publisher_Year_PublisherID">
+          <End Role="Publisher" Type="Self.Publisher" Multiplicity="1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Publisher">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="PublisherID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="PublisherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookToVersion_To_Book_Year_BookID">
+          <End Role="Book" Type="Self.Book" Multiplicity="1" />
+          <End Role="BookToVersion" Type="Self.BookToVersion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="BookID" />
+            </Principal>
+            <Dependent Role="BookToVersion">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="CreateNewVersion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="print_circ_rates">
+          <Parameter Name="Year" Type="varchar" Mode="In" />
+          <Parameter Name="BookID" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="Loreal_DEVModelStoreContainer">
+          <EntitySet Name="Book" EntityType="Self.Book" Schema="print_circ_rates" store:Type="Tables" />
+          <EntitySet Name="BookToVersion" EntityType="Self.BookToVersion" Schema="print_circ_rates" store:Type="Tables" />
+          <EntitySet Name="Genre" EntityType="Self.Genre" Schema="print_circ_rates" store:Type="Tables" />
+          <EntitySet Name="Publisher" EntityType="Self.Publisher" Schema="print_circ_rates" store:Type="Tables" />
+          <AssociationSet Name="FK_Book_To_Genre_Year_GenreID" Association="Self.FK_Book_To_Genre_Year_GenreID">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Book_To_Publisher_Year_PublisherID" Association="Self.FK_Book_To_Publisher_Year_PublisherID">
+            <End Role="Publisher" EntitySet="Publisher" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookToVersion_To_Book_Year_BookID" Association="Self.FK_BookToVersion_To_Book_Year_BookID">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="BookToVersion" EntitySet="BookToVersion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Loreal_DEVModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Loreal_DEVEntities4" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Publishers" EntityType="Loreal_DEVModel.Publisher" />
+          <FunctionImport Name="CreateNewVersion">
+            <Parameter Name="Year" Mode="In" Type="String" />
+            <Parameter Name="BookID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="BookToVersions" EntityType="Loreal_DEVModel.BookToVersion" />
+          <EntitySet Name="Books" EntityType="Loreal_DEVModel.Book" />
+          <EntitySet Name="Genres" EntityType="Loreal_DEVModel.Genre" />
+          <AssociationSet Name="FK_Book_To_Genre_Year_GenreID" Association="Loreal_DEVModel.FK_Book_To_Genre_Year_GenreID">
+            <End Role="Genre" EntitySet="Genres" />
+            <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Book_To_Publisher_Year_PublisherID" Association="Loreal_DEVModel.FK_Book_To_Publisher_Year_PublisherID">
+            <End Role="Publisher" EntitySet="Publishers" />
+            <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookToVersion_To_Book_Year_BookID" Association="Loreal_DEVModel.FK_BookToVersion_To_Book_Year_BookID">
+            <End Role="Book" EntitySet="Books" />
+            <End Role="BookToVersion" EntitySet="BookToVersions" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Publisher">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="PublisherID" />
+          </Key>
+          <Property Name="Year" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="PublisherID" Type="Int32" Nullable="false" />
+          <Property Name="Publisher1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsMain" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Load_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Books" Relationship="Loreal_DEVModel.FK_Book_To_Publisher_Year_PublisherID" FromRole="Publisher" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="BookToVersion">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="BookID" />
+            <PropertyRef Name="VersionID" />
+          </Key>
+          <Property Name="Year" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="BookID" Type="Int32" Nullable="false" />
+          <Property Name="VersionID" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Load_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Book" Relationship="Loreal_DEVModel.FK_BookToVersion_To_Book_Year_BookID" FromRole="BookToVersion" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="BookID" />
+          </Key>
+          <Property Name="Year" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="BookID" Type="Int32" Nullable="false" />
+          <Property Name="Book1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="GenreID" Type="Int32" Nullable="false" />
+          <Property Name="PublisherID" Type="Int32" Nullable="false" />
+          <Property Name="Load_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Genre" Relationship="Loreal_DEVModel.FK_Book_To_Genre_Year_GenreID" FromRole="Book" ToRole="Genre" />
+          <NavigationProperty Name="Publisher" Relationship="Loreal_DEVModel.FK_Book_To_Publisher_Year_PublisherID" FromRole="Book" ToRole="Publisher" />
+          <NavigationProperty Name="BookToVersions" Relationship="Loreal_DEVModel.FK_BookToVersion_To_Book_Year_BookID" FromRole="Book" ToRole="BookToVersion" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="Year" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="GenreID" Type="Int32" Nullable="false" />
+          <Property Name="Genre1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AvgVerifiedCircPercent" Type="Int32" Nullable="false" />
+          <Property Name="Load_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Books" Relationship="Loreal_DEVModel.FK_Book_To_Genre_Year_GenreID" FromRole="Genre" ToRole="Book" />
+        </EntityType>
+        <Association Name="FK_Book_To_Genre_Year_GenreID">
+          <End Type="Loreal_DEVModel.Genre" Role="Genre" Multiplicity="1" />
+          <End Type="Loreal_DEVModel.Book" Role="Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="GenreID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="GenreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Book_To_Publisher_Year_PublisherID">
+          <End Type="Loreal_DEVModel.Publisher" Role="Publisher" Multiplicity="1" />
+          <End Type="Loreal_DEVModel.Book" Role="Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Publisher">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="PublisherID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="PublisherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookToVersion_To_Book_Year_BookID">
+          <End Type="Loreal_DEVModel.Book" Role="Book" Multiplicity="1" />
+          <End Type="Loreal_DEVModel.BookToVersion" Role="BookToVersion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="BookID" />
+            </Principal>
+            <Dependent Role="BookToVersion">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Loreal_DEVModelStoreContainer" CdmEntityContainer="Loreal_DEVEntities4">
+          <EntitySetMapping Name="Publishers">
+            <EntityTypeMapping TypeName="Loreal_DEVModel.Publisher">
+              <MappingFragment StoreEntitySet="Publisher">
+                <ScalarProperty Name="Load_Date" ColumnName="Load_Date" />
+                <ScalarProperty Name="IsMain" ColumnName="IsMain" />
+                <ScalarProperty Name="Publisher1" ColumnName="Publisher" />
+                <ScalarProperty Name="PublisherID" ColumnName="PublisherID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CreateNewVersion" FunctionName="Loreal_DEVModel.Store.CreateNewVersion" />
+          <EntitySetMapping Name="BookToVersions">
+            <EntityTypeMapping TypeName="Loreal_DEVModel.BookToVersion">
+              <MappingFragment StoreEntitySet="BookToVersion">
+                <ScalarProperty Name="Load_Date" ColumnName="Load_Date" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="VersionID" ColumnName="VersionID" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="Loreal_DEVModel.Book">
+              <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="Load_Date" ColumnName="Load_Date" />
+                <ScalarProperty Name="PublisherID" ColumnName="PublisherID" />
+                <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+                <ScalarProperty Name="Book1" ColumnName="Book" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="Loreal_DEVModel.Genre">
+              <MappingFragment StoreEntitySet="Genre">
+                <ScalarProperty Name="Load_Date" ColumnName="Load_Date" />
+                <ScalarProperty Name="AvgVerifiedCircPercent" ColumnName="AvgVerifiedCircPercent" />
+                <ScalarProperty Name="Genre1" ColumnName="Genre" />
+                <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

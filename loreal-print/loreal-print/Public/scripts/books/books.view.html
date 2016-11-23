@@ -1,0 +1,73 @@
+﻿<div class="container-fluid">
+    <div class="row">
+
+        <!-- Home Publication/Year Options Form-->
+            <div class="col-sm-offset-3 col-sm-6">
+
+                <br />
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading text-center">
+                        <h3>Publication/Year Options</h3>
+                    </div>
+
+                    <br />
+                    <br />
+                    <form role="form" name="vm.booksForm" ng-submit="vm.selectedBookOptions()" novalidate>
+                        <div class="panel-body">
+                            <div class="row">
+
+                                <div class="col-sm-offset-1 col-sm-3 form-group-sm">
+                                    <label for="year">Year:</label>
+                                    <select class="form-control"
+                                            name="year"
+                                            id="year"
+                                            ng-model="vm.selectedYear"
+                                            required>
+                                        <option>2017</option>
+                                    </select>
+                                    <!-- show error if field is incorrect -->
+                                    <span class="label-danger white-text"
+                                          ng-class="{'hidden': !((vm.booksForm.$submitted || vm.booksForm.year.$touched) && vm.booksForm.year.$error.required)}">*Required</span>
+                                </div>
+
+                                <div class="col-sm-offset-1 col-sm-7 form-group-sm">
+                                    <label for="book">Publication:</label>
+                                    <select class="form-control"
+                                            name="book"
+                                            id="book"
+                                            ng-model="vm.selectedBook"
+                                            ng-options="o as o.Name for o in vm.books"
+                                            required></select>
+                                    <span class="label-danger white-text"
+                                        ng-class="{'hidden': !((vm.booksForm.$submitted || vm.booksForm.book.$touched) && vm.booksForm.book.$error.required)}">*Required</span>
+                                </div>
+
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-10" ng-class="{'hidden': !(vm.booksForm.$submitted && !vm.booksForm.$valid)}">
+                                    <span class="label-danger white-text">*Some of the fields are incorrect.</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <br />
+
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="pull-right table-button">
+                                    <button type="submit"
+                                            class="btn btn-primary">
+                                        Select
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+    </div>
+</div>

@@ -1,0 +1,98 @@
+﻿@*@model loreal_print.ViewModels.TermsViewModel*@
+
+@{
+    ViewBag.Title = "Terms & Conditions";
+}
+
+<h2>Terms & Conditions</h2>
+
+<div ng-app="app"
+     ng-controller="TermsController as vm">
+    @*<form name="termsForm" novalidate>*@
+    <div ng-repeat="term in vm.Terms">
+        <div class="lead panel-primary"><u>{{ term.Name }}</u></div>
+        <div ng-repeat="subsection in term.SubSectionList">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{subsection.Name}}</h3>
+                </div>
+                <div ng-repeat="question in subsection.QuestionList">
+                    <div class="panel-body">
+                        <small>
+                            <i class="col-sm-1 glyphicon glyphicon-question-sign"></i>
+                            <label class="col-sm-11 pull-left">{{question.Name}}</label>
+                        </small>
+                            <br />
+                            <div ng-switch on=question.QuestionType>
+                                <div ng-switch-when='YesNo'>
+                                    <div class="row">
+                                        <div class="radio col-sm-offset-2">
+                                            <label class="col-sm-2"><input ng-model="value" value="yes" id="{{question.ID}}-yes" type="radio" name="{{question.ID}}" ng-change="newValue(value)">Yes</label>
+                                            <label class="col-sm-2"><input ng-model="value" value="no" id="{{question.ID}}-no" type="radio" name="{{question.ID}}" ng-checked="answerSelected(value)">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <button class="btn-xs btn-primary col-sm-offset-4" ng-click="saveQuestion(question)">Save</button>
+                                    </div>
+                                </div>
+                                <div ng-switch-when='FreeForm'>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <textarea class="col-sm-offset-2 col-sm-10 form-control" rows="3" id="{{question.ID}}" name="{{question.ID}}"></textarea>
+                                        </div>
+                                        <div class="row">
+                                            <button class="btn-xs btn-primary col-sm-offset-5" ng-click="saveQuestion(question)">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-switch-when='YesNoFreeForm'>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <textarea class="col-sm-offset-2 col-sm-10 form-control" rows="3" id="{{question.ID}}" name="{{question.ID}}"></textarea>
+                                        </div>
+                                        <div class="row">
+                                            <button class="btn-xs btn-primary col-sm-offset-5" ng-click="saveQuestion(question)">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-repeat="child in question.QuestionChildrenList">
+                                <label class="col-sm-offset-2"><small>{{child.Name}}</small></label>
+                                <label class="col-sm-offset-2"><small>{{child.AnswerType}}</small></label>
+                                <div ng-switch on=child.QuestionType>
+                                    <div ng-switch-when='YesNo'>
+                                        <div class="row">
+                                            <div class="radio col-sm-offset-2">
+                                                <label class="col-sm-2"><input id="{{child.ID}}" type="radio" name="{{child.ID}}">Yes</label>
+                                                <label class="col-sm-2"><input id="{{child.ID}}" type="radio" name="{{child.ID}}">No</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div><button class="btn-xs btn-primary col-sm-offset-4" ng-click="saveQuestion(child)">Save</button></div>
+                                        </div>
+                                    </div>
+                                    <div ng-switch-when='FreeForm'>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <textarea class="col-sm-offset-2 col-sm-10 form-control" rows="3" id="{{child.ID}}" name="{{child.ID}}"></textarea>
+                                            </div>
+                                            <div class="row">
+                                                <button class="btn-xs btn-primary col-sm-offset-5" ng-click="saveQuestion(child)">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*</form>*@
+
+@section scripts {
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/app/app.module.js"></script>
+    <script src="~/app/terms.controller.js"></script>
+}

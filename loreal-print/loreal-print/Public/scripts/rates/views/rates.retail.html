@@ -1,0 +1,111 @@
+﻿    <!--Page Rates Retail-->
+<div class="row">
+    <div class="col-sm-4 font-12">
+        <h4 class="red">THIS SECTION IS ONLY MANDATORY FOR CONDE NAST TITLES</h4>
+        <p class="text-left red font-12"><u>***Please note, all dollar references are for Net US dollars.***</u></p>
+        <br />
+
+    </div>
+
+    <div class="col-sm-4 font-12">
+        <form class="form-inline">
+            <div class="form-group pull-right">
+                <label class="red">Net P4C Open Retail Rate:</label>
+                <input type="number"
+                       class="form-control"
+                       ng-change="vm.retailOpenNetP4CBrate()"
+                       ng-model="vm.retailAdTypeP4CnonBleed.RateTiers[0].RateEditionTypes[0].Rate" />
+            </div>
+
+            <div class="form-group pull-right">
+                <label class="red">Net P4CB Open Retail Rate:</label>
+                <input disabled
+                       class="form-control"                       
+                       ng-model="vm.retailAdTypeP4CB.RateTiers[0].RateEditionTypes[0].Rate" />                                 
+            </div>
+        </form>
+    </div>
+
+    <div class="col-sm-4 font-12">
+        <form class="form-inline">
+
+            <div class="form-group pull-right">
+                <label class="red">Open Bleed Premium (in %):</label>
+                <input disabled
+                       class="form-control"
+                       value="{{vm.parentP4C.BleedOpenPercentPremium}}" />
+            </div>
+
+            <div class="form-group pull-right">
+                <label class="red">L'Oréal USA Bleed Premium (in %):</label>
+                <input disabled
+                       class="form-control"
+                       value="{{vm.parentP4C.BleedEarnedPercentPremium}}" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<br />
+        <!--Discount Structure Grid-->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading text-center">(Retail) L'Oréal USA Discount Structure By Tier</div>
+            <table class="table font-10">
+                <thead>
+                    <tr>
+                        <th>Tier</th>
+                        <th>Tier Range</th>
+                        <th>Discount %</th>
+                        <th>Earned NET P4C Rate</th>
+                        <th>Earned NET P4CB Rate</th>
+                        <th>Earned NET P4C CPM</th>
+                        <th>Earned NET P4CB CPM</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="o in vm.retailAdTypeP4CnonBleed.RateTiers"
+                        ng-if="vm.retailAdTypeP4CnonBleed.RateTiers[$index].TierID!=0">
+                        <td>{{o.Tier}}</td>
+                        <td>{{o.TierRange}}</td>
+                        <!-- Discount % ((1 - Earned Net P4C Rate) / Open Net Retail rate)-->
+                        <td>
+                            <input disabled
+                                   value="{{((1 - vm.retailAdTypeP4CnonBleed.RateTiers[$index].RateEditionTypes[0].Rate/ vm.retailAdTypeP4CnonBleed.RateTiers[0].RateEditionTypes[0].Rate) * 100).toFixed(2) }}%"
+                                   ng-if="vm.retailAdTypeP4CnonBleed.RateTiers[$index].RateEditionTypes[0].Rate && vm.retailAdTypeP4CnonBleed.RateTiers[0].RateEditionTypes[0].Rate" />
+
+                        </td>
+                        <!--Earned NET P4C Rate-->
+                        <td>
+                            <input type="number"
+                                   ng-change="vm.retailEarnedNetP4Cformula(); vm.retailEarnedNetP4CBrate(); vm.retailEarnedNetP4CBcpm()"
+                                   ng-model="vm.retailAdTypeP4CnonBleed.RateTiers[$index].RateEditionTypes[0].Rate" />
+                        </td>
+
+                        <!--Earned NET P4CB Rate  ng-change="vm.earnedNetP4CBcpm"-->
+                        <td>
+                            <input type="text"
+                                   disabled
+                                   ng-change="vm.retailEarnedNetP4CBcpm()"
+                                   ng-model="vm.retailAdTypeP4CB.RateTiers[$index].RateEditionTypes[0].Rate" />
+                        </td>
+
+                        <!-- Earned NET P4C CPM  -->
+                        <td>
+                            <input type="text"
+                                   disabled
+                                   ng-model="vm.retailAdTypeP4CnonBleed.RateTiers[$index].RateEditionTypes[0].CPM" />
+                        </td>
+                        <!-- Earned NET P4CB CPM -->
+                        <td>
+                            <input type="text"
+                                   disabled
+                                   ng-model="vm.retailAdTypeP4CB.RateTiers[$index].RateEditionTypes[0].CPM" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

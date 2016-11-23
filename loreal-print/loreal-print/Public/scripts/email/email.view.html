@@ -1,0 +1,58 @@
+﻿<div class="container-fluid">
+    <div class="row">
+
+        <!-- Send Email Form-->
+        <div ng-app="app"
+             ng-controller="emailCtrl as vm" class="col-sm-offset-2 col-sm-7">
+
+            <br />
+
+            <div class="panel panel-primary">
+                <div class="panel-heading text-center">
+                    <h3>Send Email</h3>
+                </div>
+
+                <form role="form" class="email-form" name="vm.emailForm" ng-submit="vm.sendEmail()" novalidate>
+                    <div class="panel-body">
+                        <div class="container">
+                            <div class="form-group form-row col-sm-11">
+                                <label class="col-sm-1 control-label">To: </label>
+                                <!--<div class="row col-sm-9 form-group-sm form-row">-->
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" ng-model="vm.email.EmailTo" />
+                                </div>
+                            </div>
+                            <div class="form-group form-row  col-sm-11">
+                                <label class="col-sm-1 control-label">Subject: </label>
+                                <!--<div class="row col-sm-7 form-group-sm form-row">-->
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" ng-model="vm.email.EmailSubject" />
+                                </div>
+                            </div>
+                            <div class="form-group form-row col-sm-11">
+                                <label class="col-sm-1 control-label">Message: </label>
+                                <!--<div class="row col-sm-7 form-group-sm">-->
+                                <div class="col-sm-10">
+                                    <textarea id="EmailBody" class="form-control" name="EmailBody" rows="5" cols="40" required ng-model="vm.email.EmailBody" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-offset-5">
+                                <button type="submit"
+                                        class="btn btn-primary pull-right table-button">
+                                    <i class="glyphicon glyphicon-envelope"></i>
+                                    Send
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+

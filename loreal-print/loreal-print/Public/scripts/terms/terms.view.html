@@ -1,0 +1,179 @@
+﻿<h1 class="text-center"><u>Terms & Conditions</u></h1>
+
+<div class="container-fluid">
+    <div ng-repeat="term in vm.terms">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{term.Name}}</h3>
+            </div>
+            <div class="panel-body">
+                <div ng-repeat="subsection in term.SubSectionList">
+                    <form class="panel panel-info" novalidate>
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{subsection.Name}}</h3>
+                        </div>
+
+                        <div ng-repeat="question in subsection.QuestionList">
+
+                            <div class="panel-body">
+                                <!-- Parent Question and Answer-->
+
+                                <div class="row">
+                                    <p class="col-sm-12">{{question.Name}}</p>
+                                </div>
+                                <br />
+                                <!-- YesNo Parent Answer Field-->
+                                <div ng-if="question.QuestionType == 'YesNo' || question.QuestionType == 'DynamicYesNo'">
+                                    <div class="row">
+
+                                        <!-- Answer Status Glyphicons -->
+                                        <div ng-if="vm.termYesNoAns[question.ID]" class="col-sm-1 text-center">
+                                            <span class="glyphicon glyphicon-check green"></span>
+                                        </div>
+                                        <div ng-if="!vm.termYesNoAns[question.ID]" class="col-sm-1 text-center">
+                                            <span class="glyphicon glyphicon-unchecked glyphicon-align-right orange"></span>
+                                        </div>
+
+                                        <div class="radio col-sm-offset-2">
+                                            <div class="row"> 
+                                                <label class="col-sm-2">
+                                                    <input type="radio" id="{{question.ID}}" ng-model="vm.termYesNoAns[question.ID]" value="Yes" name="{{question.ID}}">Yes
+                                                </label>
+                                                <label class="col-sm-2">
+                                                    <input type="radio" id="{{question.ID}}" ng-model="vm.termYesNoAns[question.ID]" value="No" name="{{question.ID}}">No
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- YesNoFreeForm Parent Answer Field-->
+                                <div ng-if="question.QuestionType == 'YesNoFreeForm'">
+                                    <div class="row">
+                                        <!-- Answer Status Glyphicons -->
+                                        <div ng-if="vm.termYesNoAns[question.ID]" class="col-sm-1 text-center">
+                                            <span class="glyphicon glyphicon-check green"></span>
+                                        </div>
+                                        <div ng-if="!vm.termYesNoAns[question.ID]" class="col-sm-1 text-center">
+                                            <span class="glyphicon glyphicon-unchecked glyphicon-align-right orange"></span>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="radio col-sm-offset-2">
+                                                <div class="form-group">
+                                                    <label class="col-sm-6">
+                                                        <input type="radio" id="{{question.ID}}" ng-model="vm.termYesNoAns[question.ID]" value="Yes" name="{{question.ID}}">Yes
+                                                    </label>
+                                                    <label class="col-sm-6">
+                                                        <input type="radio" id="{{question.ID}}" ng-model="vm.termYesNoAns[question.ID]" value="No" name="{{question.ID}}">No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Answer Status Glyphicons -->
+                                        <div ng-if="vm.termFreeFormAns[question.ID]" class="col-sm-1 text-center">
+                                            <span class="glyphicon glyphicon-check green"></span>
+                                        </div>
+                                        <div ng-if="!vm.termFreeFormAns[question.ID]" class="col-sm-1 text-center">
+                                            <span class="glyphicon glyphicon-unchecked glyphicon-align-right orange"></span>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="{{question.ID}}">Please explain in more Detail:</label>
+                                                <textarea class="form-control wide-textarea" rows="2" id="{{question.ID}}" ng-model="vm.termFreeFormAns[question.ID]" name="{{question.ID}}"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- FreeForm Parent Answer Field-->
+                                <div ng-if="question.QuestionType == 'FreeForm'">
+                                    <div class="row">
+                                        <!-- Answer Status Glyphicons -->
+                                        <div ng-if="vm.termFreeFormAns[question.ID]" class="col-sm-1 text-center">
+                                            <span class="glyphicon glyphicon-check green"></span>
+                                        </div>
+                                        <div ng-if="!vm.termFreeFormAns[question.ID]" class="col-sm-1 text-center">
+                                            <span class="glyphicon glyphicon-unchecked glyphicon-align-right orange"></span>
+                                        </div>
+
+                                        <div class="form-group col-sm-8">
+                                            <textarea class="form-control wide-textarea" rows="2" id="{{question.ID}}" ng-model="vm.termFreeFormAns[question.ID]" name="{{question.ID}}"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Child Question and Answer-->
+                                <div ng-repeat="child in question.QuestionChildrenList">
+                                    <div ng-if="child.AnswerType == vm.termYesNoAns[question.ID]">
+                                        <div class="row">
+                                            <p class="col-sm-offset-2"><u>{{child.Name}}</u></p>
+                                        </div>
+
+                                        <!-- YesNo Child Answer Field-->
+                                        <div ng-if="child.QuestionType == 'YesNo' || child.QuestionType == 'DynamicYesNo'">
+                                            <div class="row">
+
+                                                <!-- Answer Status Glyphicons -->
+                                                <div ng-if="vm.termYesNoAns[child.ID]" class="col-sm-1 text-center">
+                                                    <span class="glyphicon glyphicon-check green"></span>
+                                                </div>
+                                                <div ng-if="!vm.termYesNoAns[child.ID]" class="col-sm-1 text-center">
+                                                    <span class="glyphicon glyphicon-unchecked glyphicon-align-right orange"></span>
+                                                </div>
+
+                                                <div class="radio col-sm-offset-2">
+                                                    <label class="col-sm-2">
+                                                        <input id="{{child.ID}}" type="radio" value="Yes" ng-model="vm.termYesNoAns[child.ID]" name="{{child.ID}}">Yes
+                                                    </label>
+                                                    <label class="col-sm-2">
+                                                        <input id="{{child.ID}}" type="radio" value="No" ng-model="vm.termYesNoAns[child.ID]" name="{{child.ID}}">No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- FreeForm Child Answer Field-->
+                                        <div ng-if="child.QuestionType == 'FreeForm'">
+                                            <div class="form-group">
+                                                <div class="row">
+
+                                                    <!-- Answer Status Glyphicons -->
+                                                    <div ng-if="vm.termFreeFormAns[child.ID]" class="col-sm-1 text-center">
+                                                        <span class="glyphicon glyphicon-check green"></span>
+                                                    </div>
+                                                    <div ng-if="!vm.termFreeFormAns[child.ID]" class="col-sm-1 text-center">
+                                                        <span class="glyphicon glyphicon-unchecked glyphicon-align-right orange"></span>
+                                                    </div>
+                                                    <div class="col-sm-offset-1 col-sm-6">
+                                                        <textarea class="form-control wide-textarea" rows="2" id="{{child.ID}}" ng-model="vm.termFreeFormAns[child.ID]" name="{{child.ID}}"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="pull-right table-button">
+                        <button class="btn-sm btn-primary"
+                                type="submit"
+                                ng-click="vm.saveAnswers()"
+                                ng-disabled="vm.isTimingOut">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

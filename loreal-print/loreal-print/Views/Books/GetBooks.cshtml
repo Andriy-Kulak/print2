@@ -1,0 +1,93 @@
+﻿@model loreal_print.ViewModels.BooksViewModel
+
+@{
+    ViewBag.Title = "Select Book";
+}
+
+<h2>Books</h2>
+<p class="alert alert-info">Both fields are <strong>required</strong>.</p>
+
+@using (Html.BeginForm("GetBooks", "Books"))
+{
+    <div ng-app="app"
+         ng-controller="BookController as vm">
+
+        <div class="form-group">
+            <label for="searchYearId"></label>
+            <select id="searchYearId"
+                    class="form-control"
+                    ng-model="vm.searchInput.selectedYear"
+                    ng-options="item.Year for item in vm.bookYears track by item.YearId"></select>
+        </div>
+        @*<span>{{vm.}}</span>*@
+        @*<p class="alert alert-info">All fields are <strong>required</strong>.</p>
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                @Html.LabelFor(m => m.Venue)
+                @Html.TextBoxFor(m => m.Venue, new { @class = "form-control", autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.Venue)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Date)
+                @Html.TextBoxFor(m => m.Date, new { @class = "form-control", placeholder = "eg 1 Jan 2016" })
+                @Html.ValidationMessageFor(m => m.Date)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Time)
+                @Html.TextBoxFor(m => m.Time, new { @class = "form-control", placeholder = "eg 20:00" })
+                @Html.ValidationMessageFor(m => m.Time)
+            </div>*@
+        <div class="form-group">
+            <label></label>
+
+            @*@Html.DropDownListFor(m => m.YearsList, new SelectList(Model.YearsList, "Year"),
+        "", new { @class = "form-control", placeholder = "Select Year" })*@
+
+
+            @*@Html.ValidationMessageFor(m => m.Book)*@
+        </div>
+        <div class="form-group">
+            @Html.DropDownListFor(m => m.BooksList, new SelectList(Model.BooksList, "Book1"),
+        "", new { @class = "form-control", placeholder = "Select Book" })
+            @*@Html.ValidationMessageFor(m => m.Book)*@
+        </div>
+
+        @*<div class="form-group">
+                <button type="submit" class="btn btn-primary">Create New Version</button>
+            </div>*@
+        <div class="panel-footer">
+            <button type="button"
+                    class="btn btn-sm btn-primary"
+                    ng-click="vm.createVersion()">
+                <i class="glyphicon glyphicon-plus"></i>
+                &nbsp;Create New Version
+            </button>
+        </div>
+    </div>
+}
+@section scripts {
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/app/app.module.js"></script>
+    <script src="~/app/product.controller.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Hook events on buttons and anchors
+            buildClickEvents();
+        });
+
+        // Hook events on buttons and anchors
+        function buildClickEvents() {
+            $("[data-pdsa-action]").on("click", function (e) {
+                e.preventDefault();
+
+                $("#EventCommand").val(
+                  $(this).data("pdsa-action"));
+
+                $("#EventArgument").val(
+                  $(this).attr("data-pdsa-val"));
+
+                $("form").submit();
+            });
+        }
+    </script>
+    }

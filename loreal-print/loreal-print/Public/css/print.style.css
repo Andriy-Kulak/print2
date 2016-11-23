@@ -1,0 +1,150 @@
+﻿ .hidden{
+   visibility:hidden;
+   display: block!important;
+ }
+
+ .white-text {
+    color: white;
+}
+
+ select.ng-touched.ng-invalid {
+    border: 1px solid red;
+}
+select.ng-dirty.ng-valid {
+    border: 1px solid blue;
+}
+
+.orange {
+    color: orange
+}
+
+.green {
+    color: green
+}
+
+.red {
+    color: red
+}
+
+.wide-textarea {
+    min-width: 100%
+}
+
+.font-9 {
+    font-size:9px;
+}
+
+.font-10 {
+    font-size:10px;
+}
+
+.font-11{
+    font-size: 11px;
+}
+
+.font-12{
+    font-size: 12px;
+}
+
+.cover-premiums {
+    width: 100%;
+    height: 150px;
+}
+
+.discount-struc {
+    width: 100%;
+    height: 200px;
+
+}
+
+.frac-premiums{
+    width: 100%;
+    height: 135px;
+}
+
+.fifth-premiums{
+    width: 100%;
+    height: 135px;
+}
+
+.bleed-premiums{
+    height: 135px;
+}
+/*Table styling*/
+.rates-report {
+    font-size:x-small;    
+}
+
+.table-title{
+    height: 15px;
+}
+.border-bottom {
+  border-bottom:1pt solid black;
+}
+
+.table-button {
+    margin-right: 15px;
+}
+
+.form-row {
+    margin-bottom: 10px;
+}
+
+.navbar-button {
+    margin-top: 10px;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.logged-in-user {
+        font-size: 14px;
+}
+
+.nav-bar-top {
+    height: 20px;
+}
+.nav-full {
+    width: 100%;
+}
+
+.calendar-width {
+    width:70px;
+}
+
+.calendar-width-lg {
+    width:100px;
+}
+.calendar-head-width {
+    width:70px;
+}
+
+.margin-navbar{
+    margin-top: auto;
+}
+
+.editorial-cal-left-margin {
+    margin-left:60px;
+}
+
+.validation-header {
+    background-color: orange;
+}
+
+.validation-table {
+    height:auto;
+    max-height: 600px;
+    overflow: auto;
+}
+
+.panel-validate {
+    border: solid 1px orange;
+}
+
+.test123 {
+    color: red;
+}
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}

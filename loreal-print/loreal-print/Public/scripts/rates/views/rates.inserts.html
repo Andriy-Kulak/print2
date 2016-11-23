@@ -1,0 +1,230 @@
+﻿<p class="text-left red font-12"><u>***Please note, all dollar references are for Net US dollars.***</u></p>
+
+<form class="form-inline">
+    <div class="row font-12">
+        <div class="form-group col-sm-8 text-right">
+            <label>
+                Scent Strips / Inserts / BRC Cards Full Run <br />
+                Rate Base Circulation Guarantee <span class="red">(Not to Include Digital Replica) - (000):</span>
+            </label>
+            <input disabled
+                   class="form-control"
+                   value={{vm.openScentStrip.RateEditionTypes[0].RateBaseCirculationGuarantee}} />
+        </div>
+    </div>
+
+    <div class="row font-12">
+        <div class="form-group col-sm-8 text-right">
+            <label>
+                Scent Strips / Inserts / BRC Cards Subscription Only <br />
+                Rate Base Circulation Guarantee <span class="red">(Not to Include Digital Replica)  - (000)</span>
+            </label>
+            <input disabled
+                   class="form-control"
+                   value={{vm.openScentStrip.RateEditionTypes[1].RateBaseCirculationGuarantee}} />
+        </div>
+    </div>
+
+    <div class="row font-12">
+        <div class="form-group col-sm-8 text-right">
+            <label>
+                Scent Strips / Inserts / BRC Cards Full Run <br />
+                Average Print Run  - <span class="red">(000)</span>
+            </label>
+            <input disabled
+                   class="form-control"
+                   value={{vm.openScentStrip.RateEditionTypes[0].AveragePrintRun}} />
+        </div>
+    </div>
+
+    <div class="row font-12">
+        <div class="form-group col-sm-8 text-right">
+            <label>
+                Scent Strips / Inserts / BRC Cards Subscription Only <br />
+                Average Print Run -  <span class="red">(000)</span>
+            </label>
+            <input disabled
+                   class="form-control"
+                   value={{vm.openScentStrip.RateEditionTypes[1].AveragePrintRun}} />
+        </div>
+    </div>
+</form>
+
+<br />
+
+<!-- Inserts - Open Rates -->
+<div class="row">
+
+    <!-- Full Run Open Rate Chart -->
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading text-center font-12"><b><u><span class="red">US Only Full Run</span> Inserts - Open Rates</u></b></div>
+            <table class="table table-condensed table-bordered font-10">
+                <thead>
+                    <tr>
+                        <th>Insert Ad Type</th>
+                        <th>NET Open Rate</th>
+                        <th>NET Open Production Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="o in vm.parentInsert.RateRateTypes[0].RateAdTypes">
+                        <td>{{o.AdType}}</td>
+                        <td>
+                            <input type="number"
+                                   ng-model="vm.parentInsert.RateRateTypes[0].RateAdTypes[$index].RateTiers[0].RateEditionTypes[0].Rate" />
+                        </td>
+                        <td>
+                            <input type="number"
+                                   ng-model="vm.parentInsert.RateRateTypes[0].RateAdTypes[$index].RateTiers[0].RateEditionTypes[0].OpenProductionCost" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Subscription Only Open Rate Chart -->
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading text-center font-12"><b><u><span class="red">US Only Subscription Only</span> Inserts - Open Rates</u></b></div>
+            <table class="table table-condensed table-bordered font-10">
+                <thead>
+                    <tr>
+                        <th>Insert Ad Type</th>
+                        <th>NET Open Rate</th>
+                        <th>NET Open Production Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="o in vm.parentInsert.RateRateTypes[0].RateAdTypes">
+                        <td>{{o.AdType}}</td>
+                        <td>
+                            <input type="number"
+                                   ng-model="vm.parentInsert.RateRateTypes[0].RateAdTypes[$index].RateTiers[0].RateEditionTypes[1].Rate" />
+                        </td>
+                        <td>
+                            <input type="number"
+                                   ng-model="vm.parentInsert.RateRateTypes[0].RateAdTypes[$index].RateTiers[0].RateEditionTypes[1].OpenProductionCost" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+
+<br />
+
+<div class="row">
+    <!-- Full Run Open Rate Chart -->
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading text-center"><b><u>2017 L'Oréal USA Inserts Rate Structure</u></b></div>
+            <table class="table table-condensed table-bordered font-10">
+                <thead>
+                    <tr>
+                        <th>Insert Ad Type</th>
+                        <th>Tier</th>
+                        <th>Tier Range</th>
+                        <th>US Only Full Run NET <br />Earned Rate</th>
+                        <th>US Only Subscription <br />Only NET Earned Rate</th>
+                        <th>US Only Full Run NET <br />Earned CPM (without Production)</th>
+                        <th>US Only Subscription Only <br />NET Earned CPM (without Production)</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="o in vm.parentInsert.RateRateTypes[0].RateAdTypes">
+                    <tr ng-repeat="sub in vm.parentInsert.RateRateTypes[0].RateAdTypes[0].RateTiers" ng-if="vm.parentInsert.RateRateTypes[0].RateAdTypes[0].RateTiers[$index].TierID!=0">
+                        <td>{{o.AdType}}</td>
+                        <td>{{sub.Tier}}</td>
+                        <td>{{sub.TierRange}}</td>
+                        <td>
+                            <input type="number"
+                                   ng-change="vm.insertsFullRunEarnedCPM()"
+                                   ng-model="vm.parentInsert.RateRateTypes[0].RateAdTypes[$parent.$parent.$index].RateTiers[$parent.$index].RateEditionTypes[0].Rate" />
+                        </td>
+                        <td>
+                            <input type="number"
+                                   ng-change="vm.insertsSubscriptionEarnedCPM()"
+                                   ng-model="vm.parentInsert.RateRateTypes[0].RateAdTypes[$parent.$parent.$index].RateTiers[$parent.$index].RateEditionTypes[1].Rate" />
+                        </td>
+                        <td>
+                            <input disabled
+                                   ng-model="vm.parentInsert.RateRateTypes[0].RateAdTypes[$parent.$parent.$index].RateTiers[$parent.$index].RateEditionTypes[0].CPM" />
+                        </td>
+                        <td>
+                            <input disabled
+                                   ng-model="vm.parentInsert.RateRateTypes[0].RateAdTypes[$parent.$parent.$index].RateTiers[$parent.$index].RateEditionTypes[1].CPM" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<!-- L'Oréal USA Production Costs and NEP Values -->
+<div class="row">
+    <!-- FULL ONLY Inserts Chart-->
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading text-center font-12"><b><u><span class="red">US Only Full Run</span> L'Oréal USA Production Costs and NEP Values for Inserts</u></b></div>
+            <table class="table table-condensed table-bordered font-10">
+                <thead>
+                    <tr>
+                        <th>Insert Ad Type</th>
+                        <th>NET L'Oréal USA <br />Earned Production Cost</th>
+                        <th>L'Oréal USA NEP Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="o in vm.parentInsert.RateRateTypes[0].RateAdTypes">
+                        <td>{{o.AdType}}</td>
+                        <td>
+                            <input type="number"
+                                   ng-model="vm.parentInsert.RateRateTypes[0].RateAdTypes[$index].RateTiers[0].RateEditionTypes[0].EarnedProductionCost" />
+                        </td>
+                        <td>
+                            <input type="number"
+                                   ng-model="vm.parentInsert.RateRateTypes[0].RateAdTypes[$index].RateTiers[0].RateEditionTypes[0].EarnedNEP" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Subscription Only Inserts Chart-->
+    <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div class="panel-heading text-center font-12"><b><u><span class="red">US Only Subscription Only</span> L'Oréal USA Production Costs and NEP Values for Inserts</u></b></div>
+            <table class="table table-condensed table-bordered font-10">
+                <thead>
+                    <tr>
+                        <th>Insert Ad Type</th>
+                        <th>NET L'Oréal USA <br />Earned Production Cost</th>
+                        <th>L'Oréal USA NEP Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="o in vm.parentInsert.RateRateTypes[0].RateAdTypes">
+                        <td>{{o.AdType}}</td>
+                        <td>
+                            <input type="number"
+                                   ng-model="vm.parentInsert.RateRateTypes[0].RateAdTypes[$index].RateTiers[0].RateEditionTypes[1].EarnedProductionCost" />
+                        </td>
+                        <td>
+                            <input type="number"
+                                   ng-model="vm.parentInsert.RateRateTypes[0].RateAdTypes[$index].RateTiers[0].RateEditionTypes[1].EarnedNEP" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

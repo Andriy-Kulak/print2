@@ -1,0 +1,149 @@
+﻿<h1 class="text-center"><u>Tablet</u></h1>
+
+<div class="container-fluid">
+    <!--<div ng-repeat="record in vm.records">-->
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            {{vm.records[0].TabletParentFunctionality}}
+        </div>
+        <div class="panel-body">
+            <div class="container">
+                <div class="row col-xs-11 text-info font-10">
+                    <label>If your magazine charges URL link fees for SFP ads, please indicate the link fee in NET $ in the following fields.  If your magazine does not charge URL link Net fees for SFP ads, please reflect $0 in these fields.</label>
+                    <label>We ask that, if you typically charge URL link fees, that you agree to waive these fees for L'Oréal USA.  If you agree, please make sure that the Net L'Oréal USA Link Fee field is reflective of this.</label>
+                </div>
+                <div class="row">
+                    <div class="col-xs-11">
+                        <table class="table table-striped table-condensed table-bordered table-hover font-11">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Net Open Link Fee</th>
+                                    <th>NET L'Oréal USA Link Fee</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{vm.records[0].TabletFunctionality}}</td>
+                                    <td>
+                                        <input type="number"
+                                               ng-change="vm.getTabletAnswers(vm.records[0])"
+                                               ng-model="vm.records[0].OpenRate" />
+                                    </td>
+                                    <td>
+                                        <input type="number"
+                                               ng-change="vm.getTabletAnswers(vm.records[0])"
+                                               ng-model="vm.records[0].EarnedRate" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <button class="btn-group-sm btn-primary pull-right table-button"
+                        type="submit"
+                        ng-disabled="vm.isTimingOut"
+                        ng-click="vm.saveTabletAnswers()">Save</button>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            {{vm.records[1].TabletParentFunctionality}}
+        </div>
+        <div class="panel-body">
+            <div class="container">
+                <div class="row col-xs-11 text-info font-10">
+                    <label>If your magazine charges creative fees for DFT ads, please indicate the creative fee in NET $ in the following fields.  If your magazine does not charge creative fees for DFT ads, please reflect $0 in these fields.</label>
+                    <label>We ask that, if you typically charge DFT creative fees, that you agree to waive these fees for L'Oréal USA.  If you agree, please make sure that the Net L'Oréal USA Creative Fee field is reflective of this.</label>
+                </div>
+                <div class="row">
+                    <div class="col-xs-11">
+                        <table class="table table-striped table-condensed table-bordered table-hover font-11">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Net Open Creative Fee ($)</th>
+                                    <th>NET L'Oréal USA Creative Fee ($)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{vm.records[1].TabletFunctionality}}</td>
+                                    <td>
+                                        <input type="number"
+                                               ng-change="vm.getTabletAnswers(vm.records[1])"
+                                               ng-model="vm.records[1].OpenRate" />
+                                    </td>
+                                    <td>
+                                        <input type="number"
+                                               ng-change="vm.getTabletAnswers(vm.records[1])"
+                                               ng-model="vm.records[1].EarnedRate" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <button class="btn-group-sm btn-primary pull-right table-button"
+                        type="submit"
+                        ng-disabled="vm.isTimingOut"
+                        ng-click="vm.saveTabletAnswers()">Save</button>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            {{vm.records[2].TabletParentFunctionality}}
+        </div>
+        <div class="panel-body">
+            <div class="container">
+                <div class="row col-xs-11 text-info font-10">
+                    <label>If your magazine charges creative fees for EFT elements, please indicate the creative fee in NET $ in the following fields by element.  If your magazine does not charge EFT creative fees, please reflect $0 in these fields.</label>
+                    <label>We ask that, if you typically charge EFT creative fees, that you agree to waive these fees for L'Oréal USA.  If you agree, please make sure that the Net L'Oréal USA Fee fields are reflective of this.</label>
+                </div>
+                <div class="row">
+                    <div class="col-xs-11">
+                        <table class="table table-striped table-condensed table-bordered table-hover font-11">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Net Open Fee ($)</th>
+                                    <th>NET L'Oréal USA Fee ($)</th>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="record in vm.records" ng-if="record.TabletParentFunctionality ==='Enhanced for Tablet'">
+                                <tr>
+                                    <td>{{record.TabletFunctionality}}</td>
+                                    <td><input type="number"
+                                               ng-change="vm.getTabletAnswers(record)"
+                                               ng-model="vm.records[$index].OpenRate"/></td>
+                                    <td><input type="number"
+                                               ng-change="vm.getTabletAnswers(record)"
+                                               ng-model="vm.records[$index].EarnedRate" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <button class="btn-group-sm btn-primary pull-right table-button"
+                        type="submit"
+                        ng-disabled="vm.isTimingOut"
+                        ng-click="vm.saveTabletAnswers()">Save</button>
+            </div>
+        </div>
+    </div>
+    <!--</div>-->
+</div>

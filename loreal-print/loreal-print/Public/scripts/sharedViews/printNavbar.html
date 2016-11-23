@@ -1,0 +1,53 @@
+﻿<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a ui-sref="books">
+                        Titles
+                    </a>
+                </li>
+                <li>
+                    <a ui-sref=".terms">
+                        Terms & Conditions
+                    </a>
+                </li>
+                <li>
+                    <a ui-sref=".rates">
+
+                        Rates
+                    </a>
+                </li>
+                <li>
+                    <a ui-sref=".ratesReport">
+                        Rates Report
+                    </a>
+                </li>
+                <li>
+                    <a ui-sref=".tablet">
+                        Tablet
+                    </a>
+                </li>
+                <li>
+                    <a ui-sref="print.editorialCalendar">
+                        Editorial Calendar
+                    </a>
+                </li>
+                <li>
+                    <a ui-sref=".circulation">
+                        Circulation
+                    </a>
+                </li>
+                <li>
+                    <a ui-sref=".signSubmit">
+                        Submit
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+<div ui-view></div>
+
+<toaster-container toaster-options="{'position-class': 'toast-top-right', 'limit':1, 'close-button': true, 'toaster-id': 1}"></toaster-container>

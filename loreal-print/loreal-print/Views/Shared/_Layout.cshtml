@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title L'Équipe L'Oréal Magazine 360</title>
+    <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Lato:400,700' />
+    <link rel='stylesheet' type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-grid/3.2.6/ui-grid.min.css" />
+    <link rel='stylesheet' type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.css" />
+    <link rel='stylesheet' type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" />
+    <link rel='stylesheet' type='text/css' href="~/public/css/print.style.css" />    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    @Styles.Render("~/Content/css")
+    @*Scripts.Render("~/bundles/modernizr")
+        @*Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")*@
+
+</head>
+<body>
+    @*<div class="navbar navbar-inverse navbar-fixed-top col-sm-6">*@
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container nav-bar-top">
+            <div class="navbar-header">
+                @Html.ActionLink(Server.HtmlDecode("L'Équipe L'Oréal Magazine 360"), "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar">
+                    </span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            @*<div class="navbar-collapse collapse col-sm-8">*@
+            <div class="navbar-collapse collapse pull-right">
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+
+        @RenderBody()
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/external/jquery/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
+        @*<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-grid/3.2.6/ui-grid.min.js"></script>*@
+        @*<script src="https://code.angularjs.org/1.2.0/angular-animate.min.js"></script>*@
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.js"></script>
+        <script type="text/javascript" src="~/public/scripts/print.module.js"></script>
+        <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.6.0.js"></script>
+        <script src="https://parall.ax/parallax/js/jspdf.js?1391533408"></script>
+        
+        <script type="text/javascript" src="~/public/dist/concatMinifiedDistFile.min.js"></script>
+        @*<script type="text/javascript" src="~/public/scripts/books/books.controller.js"></script>
+        <script type="text/javascript" src="~/public/scripts/books/books.service.js"></script>
+        <script type="text/javascript" src="~/public/scripts/circulation/circulation.controller.js"></script>
+        <script type="text/javascript" src="~/public/scripts/circulation/circulation.service.js"></script>
+        <script type="text/javascript" src="~/public/scripts/terms/terms.controller.js"></script>
+        <script type="text/javascript" src="~/public/scripts/terms/terms.service.js"></script>
+        <script type="text/javascript" src="~/public/scripts/rates/rates.service.js"></script>
+        <script type="text/javascript" src="~/public/scripts/rates/rates.controller.js"></script>
+        <script type="text/javascript" src="~/public/scripts/ratesReport/ratesReport.controller.js"></script>
+        <script type="text/javascript" src="~/public/scripts/ratesreport/ratesreport.service.js"></script>
+        <script type="text/javascript" src="~/public/scripts/tablet/tablet.controller.js"></script>
+        <script type="text/javascript" src="~/public/scripts/editorialcalendar/editorialcalendar.service.js"></script>
+        <script type="text/javascript" src="~/public/scripts/editorialcalendar/editorialcalendar.controller.js"></script>
+        <script type="text/javascript" src="~/public/scripts/email/email.controller.js"></script>
+        <script type="text/javascript" src="~/public/scripts/signSubmit/signSubmit.controller.js"></script>
+        <script type="text/javascript" src="~/public/scripts/sharedServices/modals.service.js"></script>*@
+        <hr />
+        <footer>
+            <label class="col-xs-5 pull-left">&copy; @Server.HtmlDecode("L'Équipe L'Oréal Magazine 360")</label>
+            <label class="col-xs-2 pull-right">Version @ViewContext.Controller.GetType().Assembly.GetName().Version</label>
+            @*Machine: @System.Environment.MachineName.Substring(System.Environment.MachineName.Length - 3)*@
+        </footer>
+    </div>
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

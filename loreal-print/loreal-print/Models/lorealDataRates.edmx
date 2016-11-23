@@ -1,0 +1,1380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Loreal_DEVRatesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdType">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="AdTypeID" />
+          </Key>
+          <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="ParentAdTypeID" Type="int" Nullable="false" />
+          <Property Name="AdTypeID" Type="int" Nullable="false" />
+          <Property Name="AdType" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Load_Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookToRateType">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="BookID" />
+            <PropertyRef Name="RateTypeID" />
+          </Key>
+          <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="BookID" Type="int" Nullable="false" />
+          <Property Name="RateTypeID" Type="int" Nullable="false" />
+          <Property Name="Load_Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Circulation">
+          <Key>
+            <PropertyRef Name="CirculationID" />
+          </Key>
+          <Property Name="CirculationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="BookID" Type="int" Nullable="false" />
+          <Property Name="CirculationSubTypeID" Type="int" Nullable="false" />
+          <Property Name="PrintCirculation" Type="int" />
+          <Property Name="DigitalReplicaCirculation" Type="int" />
+          <Property Name="DigitalNonReplicaCirculation" Type="int" />
+          <Property Name="VersionID" Type="int" Nullable="false" />
+          <Property Name="Load_Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CirculationGuarantee">
+          <Key>
+            <PropertyRef Name="CirculationGuaranteeID" />
+          </Key>
+          <Property Name="CirculationGuaranteeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="BookID" Type="int" Nullable="false" />
+          <Property Name="ParentAdTypeID" Type="int" Nullable="false" />
+          <Property Name="EditionTypeID" Type="int" Nullable="false" />
+          <Property Name="RateBaseCirculationGuarantee" Type="int" Nullable="false" />
+          <Property Name="AveragePrintRun" Type="int" />
+          <Property Name="VersionID" Type="int" Nullable="false" />
+          <Property Name="Load_Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EditionType">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="EditionTypeID" />
+          </Key>
+          <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="EditionTypeID" Type="int" Nullable="false" />
+          <Property Name="EditionType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Load_Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EditorialCalendar">
+          <Key>
+            <PropertyRef Name="EditorialCalendarID" />
+          </Key>
+          <Property Name="EditorialCalendarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="BookID" Type="int" Nullable="false" />
+          <Property Name="IssueDate" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="EditorialTheme" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="OnSaleDate" Type="date" Nullable="false" />
+          <Property Name="MailToSubscribersDate" Type="date" Nullable="false" />
+          <Property Name="SpaceClosingDate_ROB" Type="date" Nullable="false" />
+          <Property Name="SpaceClosingDate_Covers" Type="date" Nullable="false" />
+          <Property Name="SpaceClosingDate_ScentStrips" Type="date" Nullable="false" />
+          <Property Name="MaterialsClosingDate_ROB" Type="date" Nullable="false" />
+          <Property Name="MaterialsClosingDate_Covers" Type="date" Nullable="false" />
+          <Property Name="MaterialsClosingDate_ScentStrips" Type="date" Nullable="false" />
+          <Property Name="VersionID" Type="int" Nullable="false" />
+          <Property Name="Load_Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="GenreID" Type="int" Nullable="false" />
+          <Property Name="Genre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AvgVerifiedCircPercent" Type="int" Nullable="false" />
+          <Property Name="Load_Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ParentAdType">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="ParentAdTypeID" />
+          </Key>
+          <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="ParentAdTypeID" Type="int" Nullable="false" />
+          <Property Name="ParentAdType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Load_Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PremiumDiscountRate">
+          <Key>
+            <PropertyRef Name="PremiumDiscountRateID" />
+          </Key>
+          <Property Name="PremiumDiscountRateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="BookID" Type="int" Nullable="false" />
+          <Property Name="AdvertorialEarnedPercentDiscount" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="BleedOpenPercentPremium" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="BleedEarnedPercentPremium" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="Cover2OpenPercentPremium" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="Cover2EarnedPercentPremium" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="Cover3OpenPercentPremium" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="Cover3EarnedPercentPremium" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="Cover4OpenPercentPremium" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="Cover4EarnedPercentPremium" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="FracHalfPageOpenPercentPremium" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="FracHalfPageEarnedPercentPremium" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="FracThirdPageOpenPercentPremium" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="FracThirdPageEarnedPercentPremium" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="FracThirdRunOppFBPOpenPercentPremium" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="FracThirdRunOppFBPEarnedPercentPremium" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="SpreadC2P1EarnedPercentDiscount" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="SpreadROBEarnedPercentDiscount" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="FifthColorMetallicOpenDollarPremium" Type="int" />
+          <Property Name="FifthColorMetallicEarnedDollarPremium" Type="int" />
+          <Property Name="FifthColorMatchOpenDollarPremium" Type="int" />
+          <Property Name="FifthColorMatchEarnedDollarPremium" Type="int" />
+          <Property Name="FifthColorPMSOpenDollarPremium" Type="int" />
+          <Property Name="FifthColorPMSEarnedDollarPremium" Type="int" />
+          <Property Name="VersionID" Type="int" Nullable="false" />
+          <Property Name="Load_Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductionCostNEP">
+          <Key>
+            <PropertyRef Name="ProductionCostNEPID" />
+          </Key>
+          <Property Name="ProductionCostNEPID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="BookID" Type="int" Nullable="false" />
+          <Property Name="AdTypeID" Type="int" Nullable="false" />
+          <Property Name="EditionTypeID" Type="int" Nullable="false" />
+          <Property Name="OpenProductionCost" Type="int" />
+          <Property Name="EarnedProductionCost" Type="int" />
+          <Property Name="EarnedNEP" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="VersionID" Type="int" Nullable="false" />
+          <Property Name="Load_Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Publisher">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="PublisherID" />
+          </Key>
+          <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="PublisherID" Type="int" Nullable="false" />
+          <Property Name="Publisher" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IsMain" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Load_Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rate">
+          <Key>
+            <PropertyRef Name="RateID" />
+          </Key>
+          <Property Name="RateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="BookID" Type="int" Nullable="false" />
+          <Property Name="AdTypeID" Type="int" Nullable="false" />
+          <Property Name="EditionTypeID" Type="int" Nullable="false" />
+          <Property Name="RateTypeID" Type="int" Nullable="false" />
+          <Property Name="TierID" Type="int" Nullable="false" />
+          <Property Name="Rate" Type="numeric" Precision="12" Scale="2" />
+          <Property Name="OpenOrEarned" Type="varchar" MaxLength="6" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="CPM" Type="numeric" Precision="12" Scale="2" />
+          <Property Name="PublisherAgreement" Type="varchar" MaxLength="3" />
+          <Property Name="IsOverriden" Type="varchar" MaxLength="3" />
+          <Property Name="VersionID" Type="int" Nullable="false" />
+          <Property Name="Load_Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RateType">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="RateTypeID" />
+          </Key>
+          <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="RateTypeID" Type="int" Nullable="false" />
+          <Property Name="RateType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Load_Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TabletRate">
+          <Key>
+            <PropertyRef Name="TabletRateID" />
+          </Key>
+          <Property Name="TabletRateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="BookID" Type="int" Nullable="false" />
+          <Property Name="TabletFunctionalityID" Type="int" Nullable="false" />
+          <Property Name="OpenRate" Type="int" />
+          <Property Name="EarnedRate" Type="int" />
+          <Property Name="VersionID" Type="int" Nullable="false" />
+          <Property Name="Load_Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tier">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="BookID" />
+            <PropertyRef Name="TierID" />
+          </Key>
+          <Property Name="Year" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="BookID" Type="int" Nullable="false" />
+          <Property Name="TierID" Type="int" Nullable="false" />
+          <Property Name="TierStart" Type="int" Nullable="false" />
+          <Property Name="TierEnd" Type="int" Nullable="false" />
+          <Property Name="TierBase" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IsFlat" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Load_Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AdType_To_ParentAdType_Year_ParentAdTypeID">
+          <End Role="ParentAdType" Type="Self.ParentAdType" Multiplicity="1" />
+          <End Role="AdType" Type="Self.AdType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParentAdType">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="ParentAdTypeID" />
+            </Principal>
+            <Dependent Role="AdType">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="ParentAdTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookToRateType_To_RateType_Year_RateTypeID">
+          <End Role="RateType" Type="Self.RateType" Multiplicity="1" />
+          <End Role="BookToRateType" Type="Self.BookToRateType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RateType">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="RateTypeID" />
+            </Principal>
+            <Dependent Role="BookToRateType">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="RateTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CirculationGuarantee_To_EditionType_Year_EditionTypeID">
+          <End Role="EditionType" Type="Self.EditionType" Multiplicity="1" />
+          <End Role="CirculationGuarantee" Type="Self.CirculationGuarantee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EditionType">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="EditionTypeID" />
+            </Principal>
+            <Dependent Role="CirculationGuarantee">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="EditionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CirculationGuarantee_To_ParentAdType_Year_ParentAdTypeID">
+          <End Role="ParentAdType" Type="Self.ParentAdType" Multiplicity="1" />
+          <End Role="CirculationGuarantee" Type="Self.CirculationGuarantee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParentAdType">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="ParentAdTypeID" />
+            </Principal>
+            <Dependent Role="CirculationGuarantee">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="ParentAdTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductionCostNEP_To_AdType_Year_AdTypeID">
+          <End Role="AdType" Type="Self.AdType" Multiplicity="1" />
+          <End Role="ProductionCostNEP" Type="Self.ProductionCostNEP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdType">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="AdTypeID" />
+            </Principal>
+            <Dependent Role="ProductionCostNEP">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="AdTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductionCostNEP_To_EditionType_Year_EditionTypeID">
+          <End Role="EditionType" Type="Self.EditionType" Multiplicity="1" />
+          <End Role="ProductionCostNEP" Type="Self.ProductionCostNEP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EditionType">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="EditionTypeID" />
+            </Principal>
+            <Dependent Role="ProductionCostNEP">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="EditionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rate_To_AdType_Year_AdTypeID">
+          <End Role="AdType" Type="Self.AdType" Multiplicity="1" />
+          <End Role="Rate" Type="Self.Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdType">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="AdTypeID" />
+            </Principal>
+            <Dependent Role="Rate">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="AdTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rate_To_EditionType_Year_EditionTypeID">
+          <End Role="EditionType" Type="Self.EditionType" Multiplicity="1" />
+          <End Role="Rate" Type="Self.Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EditionType">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="EditionTypeID" />
+            </Principal>
+            <Dependent Role="Rate">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="EditionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rate_To_RateType_Year_RateTypeID">
+          <End Role="RateType" Type="Self.RateType" Multiplicity="1" />
+          <End Role="Rate" Type="Self.Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RateType">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="RateTypeID" />
+            </Principal>
+            <Dependent Role="Rate">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="RateTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rate_To_Tier_Year_BookID_TierID">
+          <End Role="Tier" Type="Self.Tier" Multiplicity="1" />
+          <End Role="Rate" Type="Self.Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tier">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="BookID" />
+              <PropertyRef Name="TierID" />
+            </Principal>
+            <Dependent Role="Rate">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="BookID" />
+              <PropertyRef Name="TierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetCirculation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="print_circ_rates">
+          <Parameter Name="Year" Type="varchar" Mode="In" />
+          <Parameter Name="BookID" Type="int" Mode="In" />
+          <Parameter Name="VersionID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetRates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="print_circ_rates">
+          <Parameter Name="Year" Type="varchar" Mode="In" />
+          <Parameter Name="BookID" Type="int" Mode="In" />
+          <Parameter Name="VersionID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetRatesEndReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="print_circ_rates">
+          <Parameter Name="Year" Type="varchar" Mode="In" />
+          <Parameter Name="BookID" Type="int" Mode="In" />
+          <Parameter Name="VersionID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetTabletRates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="print_circ_rates">
+          <Parameter Name="Year" Type="varchar" Mode="In" />
+          <Parameter Name="BookID" Type="int" Mode="In" />
+          <Parameter Name="VersionID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ValidateAllInputs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="print_circ_rates">
+          <Parameter Name="Year" Type="int" Mode="In" />
+          <Parameter Name="BookID" Type="int" Mode="In" />
+          <Parameter Name="VersionID" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="Loreal_DEVRatesModelStoreContainer">
+          <EntitySet Name="AdType" EntityType="Self.AdType" Schema="print_circ_rates" store:Type="Tables" />
+          <EntitySet Name="BookToRateType" EntityType="Self.BookToRateType" Schema="print_circ_rates" store:Type="Tables" />
+          <EntitySet Name="Circulation" EntityType="Self.Circulation" Schema="print_circ_rates" store:Type="Tables" />
+          <EntitySet Name="CirculationGuarantee" EntityType="Self.CirculationGuarantee" Schema="print_circ_rates" store:Type="Tables" />
+          <EntitySet Name="EditionType" EntityType="Self.EditionType" Schema="print_circ_rates" store:Type="Tables" />
+          <EntitySet Name="EditorialCalendar" EntityType="Self.EditorialCalendar" Schema="print_circ_rates" store:Type="Tables" />
+          <EntitySet Name="Genre" EntityType="Self.Genre" Schema="print_circ_rates" store:Type="Tables" />
+          <EntitySet Name="ParentAdType" EntityType="Self.ParentAdType" Schema="print_circ_rates" store:Type="Tables" />
+          <EntitySet Name="PremiumDiscountRate" EntityType="Self.PremiumDiscountRate" Schema="print_circ_rates" store:Type="Tables" />
+          <EntitySet Name="ProductionCostNEP" EntityType="Self.ProductionCostNEP" Schema="print_circ_rates" store:Type="Tables" />
+          <EntitySet Name="Publisher" EntityType="Self.Publisher" Schema="print_circ_rates" store:Type="Tables" />
+          <EntitySet Name="Rate" EntityType="Self.Rate" Schema="print_circ_rates" store:Type="Tables" />
+          <EntitySet Name="RateType" EntityType="Self.RateType" Schema="print_circ_rates" store:Type="Tables" />
+          <EntitySet Name="TabletRate" EntityType="Self.TabletRate" Schema="print_circ_rates" store:Type="Tables" />
+          <EntitySet Name="Tier" EntityType="Self.Tier" Schema="print_circ_rates" store:Type="Tables" />
+          <AssociationSet Name="FK_AdType_To_ParentAdType_Year_ParentAdTypeID" Association="Self.FK_AdType_To_ParentAdType_Year_ParentAdTypeID">
+            <End Role="ParentAdType" EntitySet="ParentAdType" />
+            <End Role="AdType" EntitySet="AdType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookToRateType_To_RateType_Year_RateTypeID" Association="Self.FK_BookToRateType_To_RateType_Year_RateTypeID">
+            <End Role="RateType" EntitySet="RateType" />
+            <End Role="BookToRateType" EntitySet="BookToRateType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CirculationGuarantee_To_EditionType_Year_EditionTypeID" Association="Self.FK_CirculationGuarantee_To_EditionType_Year_EditionTypeID">
+            <End Role="EditionType" EntitySet="EditionType" />
+            <End Role="CirculationGuarantee" EntitySet="CirculationGuarantee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CirculationGuarantee_To_ParentAdType_Year_ParentAdTypeID" Association="Self.FK_CirculationGuarantee_To_ParentAdType_Year_ParentAdTypeID">
+            <End Role="ParentAdType" EntitySet="ParentAdType" />
+            <End Role="CirculationGuarantee" EntitySet="CirculationGuarantee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductionCostNEP_To_AdType_Year_AdTypeID" Association="Self.FK_ProductionCostNEP_To_AdType_Year_AdTypeID">
+            <End Role="AdType" EntitySet="AdType" />
+            <End Role="ProductionCostNEP" EntitySet="ProductionCostNEP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductionCostNEP_To_EditionType_Year_EditionTypeID" Association="Self.FK_ProductionCostNEP_To_EditionType_Year_EditionTypeID">
+            <End Role="EditionType" EntitySet="EditionType" />
+            <End Role="ProductionCostNEP" EntitySet="ProductionCostNEP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rate_To_AdType_Year_AdTypeID" Association="Self.FK_Rate_To_AdType_Year_AdTypeID">
+            <End Role="AdType" EntitySet="AdType" />
+            <End Role="Rate" EntitySet="Rate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rate_To_EditionType_Year_EditionTypeID" Association="Self.FK_Rate_To_EditionType_Year_EditionTypeID">
+            <End Role="EditionType" EntitySet="EditionType" />
+            <End Role="Rate" EntitySet="Rate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rate_To_RateType_Year_RateTypeID" Association="Self.FK_Rate_To_RateType_Year_RateTypeID">
+            <End Role="RateType" EntitySet="RateType" />
+            <End Role="Rate" EntitySet="Rate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rate_To_Tier_Year_BookID_TierID" Association="Self.FK_Rate_To_Tier_Year_BookID_TierID">
+            <End Role="Tier" EntitySet="Tier" />
+            <End Role="Rate" EntitySet="Rate" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Loreal_DEVRatesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AdType">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="AdTypeID" />
+          </Key>
+          <Property Name="Year" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ParentAdTypeID" Type="Int32" Nullable="false" />
+          <Property Name="AdTypeID" Type="Int32" Nullable="false" />
+          <Property Name="AdType1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Load_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ParentAdType" Relationship="Self.FK_AdType_To_ParentAdType_Year_ParentAdTypeID" FromRole="AdType" ToRole="ParentAdType" />
+          <NavigationProperty Name="ProductionCostNEPs" Relationship="Loreal_DEVRatesModel.FK_ProductionCostNEP_To_AdType_Year_AdTypeID" FromRole="AdType" ToRole="ProductionCostNEP" />
+          <NavigationProperty Name="Rates" Relationship="Loreal_DEVRatesModel.FK_Rate_To_AdType_Year_AdTypeID" FromRole="AdType" ToRole="Rate" />
+        </EntityType>
+        <EntityType Name="BookToRateType">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="BookID" />
+            <PropertyRef Name="RateTypeID" />
+          </Key>
+          <Property Name="Year" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BookID" Type="Int32" Nullable="false" />
+          <Property Name="RateTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Load_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="RateType" Relationship="Self.FK_BookToRateType_To_RateType_Year_RateTypeID" FromRole="BookToRateType" ToRole="RateType" />
+        </EntityType>
+        <EntityType Name="EditionType">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="EditionTypeID" />
+          </Key>
+          <Property Name="Year" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EditionTypeID" Type="Int32" Nullable="false" />
+          <Property Name="EditionType1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Load_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CirculationGuarantees" Relationship="Loreal_DEVRatesModel.FK_CirculationGuarantee_To_EditionType_Year_EditionTypeID" FromRole="EditionType" ToRole="CirculationGuarantee" />
+          <NavigationProperty Name="ProductionCostNEPs" Relationship="Loreal_DEVRatesModel.FK_ProductionCostNEP_To_EditionType_Year_EditionTypeID" FromRole="EditionType" ToRole="ProductionCostNEP" />
+          <NavigationProperty Name="Rates" Relationship="Loreal_DEVRatesModel.FK_Rate_To_EditionType_Year_EditionTypeID" FromRole="EditionType" ToRole="Rate" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="Year" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GenreID" Type="Int32" Nullable="false" />
+          <Property Name="Genre1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AvgVerifiedCircPercent" Type="Int32" Nullable="false" />
+          <Property Name="Load_Date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="ParentAdType">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="ParentAdTypeID" />
+          </Key>
+          <Property Name="Year" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ParentAdTypeID" Type="Int32" Nullable="false" />
+          <Property Name="ParentAdType1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Load_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AdTypes" Relationship="Self.FK_AdType_To_ParentAdType_Year_ParentAdTypeID" FromRole="ParentAdType" ToRole="AdType" />
+          <NavigationProperty Name="CirculationGuarantees" Relationship="Loreal_DEVRatesModel.FK_CirculationGuarantee_To_ParentAdType_Year_ParentAdTypeID" FromRole="ParentAdType" ToRole="CirculationGuarantee" />
+        </EntityType>
+        <EntityType Name="Publisher">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="PublisherID" />
+          </Key>
+          <Property Name="Year" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PublisherID" Type="Int32" Nullable="false" />
+          <Property Name="Publisher1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsMain" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Load_Date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="RateType">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="RateTypeID" />
+          </Key>
+          <Property Name="Year" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RateTypeID" Type="Int32" Nullable="false" />
+          <Property Name="RateType1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Load_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="BookToRateTypes" Relationship="Self.FK_BookToRateType_To_RateType_Year_RateTypeID" FromRole="RateType" ToRole="BookToRateType" />
+          <NavigationProperty Name="Rates" Relationship="Loreal_DEVRatesModel.FK_Rate_To_RateType_Year_RateTypeID" FromRole="RateType" ToRole="Rate" />
+        </EntityType>
+        <EntityType Name="Tier">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="BookID" />
+            <PropertyRef Name="TierID" />
+          </Key>
+          <Property Name="Year" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BookID" Type="Int32" Nullable="false" />
+          <Property Name="TierID" Type="Int32" Nullable="false" />
+          <Property Name="TierStart" Type="Int32" Nullable="false" />
+          <Property Name="TierEnd" Type="Int32" Nullable="false" />
+          <Property Name="TierBase" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsFlat" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Load_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Rates" Relationship="Loreal_DEVRatesModel.FK_Rate_To_Tier_Year_BookID_TierID" FromRole="Tier" ToRole="Rate" />
+        </EntityType>
+        <Association Name="FK_AdType_To_ParentAdType_Year_ParentAdTypeID">
+          <End Role="ParentAdType" Type="Self.ParentAdType" Multiplicity="1" />
+          <End Role="AdType" Type="Self.AdType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParentAdType">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="ParentAdTypeID" />
+            </Principal>
+            <Dependent Role="AdType">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="ParentAdTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookToRateType_To_RateType_Year_RateTypeID">
+          <End Role="RateType" Type="Self.RateType" Multiplicity="1" />
+          <End Role="BookToRateType" Type="Self.BookToRateType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RateType">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="RateTypeID" />
+            </Principal>
+            <Dependent Role="BookToRateType">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="RateTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Loreal_DEVEntities6" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdTypes" EntityType="Self.AdType" />
+          <EntitySet Name="BookToRateTypes" EntityType="Self.BookToRateType" />
+          <EntitySet Name="EditionTypes" EntityType="Self.EditionType" />
+          <EntitySet Name="Genres" EntityType="Self.Genre" />
+          <EntitySet Name="ParentAdTypes" EntityType="Self.ParentAdType" />
+          <EntitySet Name="Publishers" EntityType="Self.Publisher" />
+          <EntitySet Name="RateTypes" EntityType="Self.RateType" />
+          <EntitySet Name="Tiers" EntityType="Self.Tier" />
+          <AssociationSet Name="FK_AdType_To_ParentAdType_Year_ParentAdTypeID" Association="Self.FK_AdType_To_ParentAdType_Year_ParentAdTypeID">
+            <End Role="ParentAdType" EntitySet="ParentAdTypes" />
+            <End Role="AdType" EntitySet="AdTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookToRateType_To_RateType_Year_RateTypeID" Association="Self.FK_BookToRateType_To_RateType_Year_RateTypeID">
+            <End Role="RateType" EntitySet="RateTypes" />
+            <End Role="BookToRateType" EntitySet="BookToRateTypes" />
+          </AssociationSet>
+          <EntitySet Name="CirculationGuarantees" EntityType="Loreal_DEVRatesModel.CirculationGuarantee" />
+          <AssociationSet Name="FK_CirculationGuarantee_To_EditionType_Year_EditionTypeID" Association="Loreal_DEVRatesModel.FK_CirculationGuarantee_To_EditionType_Year_EditionTypeID">
+            <End Role="EditionType" EntitySet="EditionTypes" />
+            <End Role="CirculationGuarantee" EntitySet="CirculationGuarantees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CirculationGuarantee_To_ParentAdType_Year_ParentAdTypeID" Association="Loreal_DEVRatesModel.FK_CirculationGuarantee_To_ParentAdType_Year_ParentAdTypeID">
+            <End Role="ParentAdType" EntitySet="ParentAdTypes" />
+            <End Role="CirculationGuarantee" EntitySet="CirculationGuarantees" />
+          </AssociationSet>
+          <FunctionImport Name="GetRatesEndReport" ReturnType="Collection(Loreal_DEVRatesModel.GetRatesEndReport_Result)">
+            <Parameter Name="Year" Mode="In" Type="String" />
+            <Parameter Name="BookID" Mode="In" Type="Int32" />
+            <Parameter Name="VersionID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Circulations" EntityType="Loreal_DEVRatesModel.Circulation" />
+          <FunctionImport Name="GetCirculation" ReturnType="Collection(Loreal_DEVRatesModel.GetCirculation_Result)">
+            <Parameter Name="Year" Mode="In" Type="String" />
+            <Parameter Name="BookID" Mode="In" Type="Int32" />
+            <Parameter Name="VersionID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetRates" ReturnType="Collection(Loreal_DEVRatesModel.GetRates_Result)">
+            <Parameter Name="Year" Mode="In" Type="String" />
+            <Parameter Name="BookID" Mode="In" Type="Int32" />
+            <Parameter Name="VersionID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetTabletRates" ReturnType="Collection(Loreal_DEVRatesModel.GetTabletRates_Result)">
+            <Parameter Name="Year" Mode="In" Type="String" />
+            <Parameter Name="BookID" Mode="In" Type="Int32" />
+            <Parameter Name="VersionID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="TabletRates" EntityType="Loreal_DEVRatesModel.TabletRate" />
+          <EntitySet Name="EditorialCalendars" EntityType="Loreal_DEVRatesModel.EditorialCalendar" />
+          <EntitySet Name="ProductionCostNEPs" EntityType="Loreal_DEVRatesModel.ProductionCostNEP" />
+          <AssociationSet Name="FK_ProductionCostNEP_To_AdType_Year_AdTypeID" Association="Loreal_DEVRatesModel.FK_ProductionCostNEP_To_AdType_Year_AdTypeID">
+            <End Role="AdType" EntitySet="AdTypes" />
+            <End Role="ProductionCostNEP" EntitySet="ProductionCostNEPs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductionCostNEP_To_EditionType_Year_EditionTypeID" Association="Loreal_DEVRatesModel.FK_ProductionCostNEP_To_EditionType_Year_EditionTypeID">
+            <End Role="EditionType" EntitySet="EditionTypes" />
+            <End Role="ProductionCostNEP" EntitySet="ProductionCostNEPs" />
+          </AssociationSet>
+          <EntitySet Name="PremiumDiscountRates" EntityType="Loreal_DEVRatesModel.PremiumDiscountRate" />
+          <EntitySet Name="Rates" EntityType="Loreal_DEVRatesModel.Rate" />
+          <AssociationSet Name="FK_Rate_To_AdType_Year_AdTypeID" Association="Loreal_DEVRatesModel.FK_Rate_To_AdType_Year_AdTypeID">
+            <End Role="AdType" EntitySet="AdTypes" />
+            <End Role="Rate" EntitySet="Rates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rate_To_EditionType_Year_EditionTypeID" Association="Loreal_DEVRatesModel.FK_Rate_To_EditionType_Year_EditionTypeID">
+            <End Role="EditionType" EntitySet="EditionTypes" />
+            <End Role="Rate" EntitySet="Rates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rate_To_RateType_Year_RateTypeID" Association="Loreal_DEVRatesModel.FK_Rate_To_RateType_Year_RateTypeID">
+            <End Role="RateType" EntitySet="RateTypes" />
+            <End Role="Rate" EntitySet="Rates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rate_To_Tier_Year_BookID_TierID" Association="Loreal_DEVRatesModel.FK_Rate_To_Tier_Year_BookID_TierID">
+            <End Role="Tier" EntitySet="Tiers" />
+            <End Role="Rate" EntitySet="Rates" />
+          </AssociationSet>
+          <FunctionImport Name="ValidateAllInputs" ReturnType="Collection(String)">
+            <Parameter Name="Year" Mode="In" Type="Int32" />
+            <Parameter Name="BookID" Mode="In" Type="Int32" />
+            <Parameter Name="VersionID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          </EntityContainer>
+        <EntityType Name="CirculationGuarantee">
+          <Key>
+            <PropertyRef Name="CirculationGuaranteeID" />
+          </Key>
+          <Property Name="CirculationGuaranteeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Year" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="BookID" Type="Int32" Nullable="false" />
+          <Property Name="ParentAdTypeID" Type="Int32" Nullable="false" />
+          <Property Name="EditionTypeID" Type="Int32" Nullable="false" />
+          <Property Name="RateBaseCirculationGuarantee" Type="Int32" Nullable="false" />
+          <Property Name="AveragePrintRun" Type="Int32" />
+          <Property Name="VersionID" Type="Int32" Nullable="false" />
+          <Property Name="Load_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="EditionType" Relationship="Loreal_DEVRatesModel.FK_CirculationGuarantee_To_EditionType_Year_EditionTypeID" FromRole="CirculationGuarantee" ToRole="EditionType" />
+          <NavigationProperty Name="ParentAdType" Relationship="Loreal_DEVRatesModel.FK_CirculationGuarantee_To_ParentAdType_Year_ParentAdTypeID" FromRole="CirculationGuarantee" ToRole="ParentAdType" />
+        </EntityType>
+        <Association Name="FK_CirculationGuarantee_To_EditionType_Year_EditionTypeID">
+          <End Type="Loreal_DEVRatesModel.EditionType" Role="EditionType" Multiplicity="1" />
+          <End Type="Loreal_DEVRatesModel.CirculationGuarantee" Role="CirculationGuarantee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EditionType">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="EditionTypeID" />
+            </Principal>
+            <Dependent Role="CirculationGuarantee">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="EditionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CirculationGuarantee_To_ParentAdType_Year_ParentAdTypeID">
+          <End Type="Loreal_DEVRatesModel.ParentAdType" Role="ParentAdType" Multiplicity="1" />
+          <End Type="Loreal_DEVRatesModel.CirculationGuarantee" Role="CirculationGuarantee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParentAdType">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="ParentAdTypeID" />
+            </Principal>
+            <Dependent Role="CirculationGuarantee">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="ParentAdTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetRatesEndReport_Result">
+          <Property Type="String" Name="Year" Nullable="true" MaxLength="4" />
+          <Property Type="Int32" Name="BookID" Nullable="true" />
+          <Property Type="Int32" Name="TierID" Nullable="true" />
+          <Property Type="String" Name="Tier" Nullable="true" MaxLength="35" />
+          <Property Type="String" Name="TierRange" Nullable="true" MaxLength="25" />
+          <Property Type="Int32" Name="ParentAdTypeID" Nullable="true" />
+          <Property Type="String" Name="ParentAdType" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="AdTypeID" Nullable="true" />
+          <Property Type="String" Name="AdType" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="EditionTypeID" Nullable="true" />
+          <Property Type="String" Name="EditionType" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="RateTypeID" Nullable="true" />
+          <Property Type="String" Name="RateType" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="Rate" Nullable="true" Precision="12" Scale="2" />
+          <Property Type="String" Name="PublisherAgreement" Nullable="true" MaxLength="3" />
+          <Property Type="Int32" Name="VersionID" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Circulation">
+          <Key>
+            <PropertyRef Name="CirculationID" />
+          </Key>
+          <Property Name="CirculationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Year" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="BookID" Type="Int32" Nullable="false" />
+          <Property Name="CirculationSubTypeID" Type="Int32" Nullable="false" />
+          <Property Name="PrintCirculation" Type="Int32" />
+          <Property Name="DigitalReplicaCirculation" Type="Int32" />
+          <Property Name="DigitalNonReplicaCirculation" Type="Int32" />
+          <Property Name="VersionID" Type="Int32" Nullable="false" />
+          <Property Name="Load_Date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <ComplexType Name="GetCirculation_Result">
+          <Property Type="String" Name="CirculationGroupType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CirculationType" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CirculationSubType" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="CirculationSubTypeID" Nullable="false" />
+          <Property Type="Int32" Name="PrintCirculation" Nullable="true" />
+          <Property Type="Int32" Name="DigitalReplicaCirculation" Nullable="true" />
+          <Property Type="Int32" Name="DigitalNonReplicaCirculation" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetRates_Result">
+          <Property Type="String" Name="Year" Nullable="true" MaxLength="4" />
+          <Property Type="Int32" Name="BookID" Nullable="true" />
+          <Property Type="Int32" Name="TierID" Nullable="true" />
+          <Property Type="String" Name="Tier" Nullable="true" MaxLength="35" />
+          <Property Type="String" Name="TierRange" Nullable="true" MaxLength="25" />
+          <Property Type="Int32" Name="ParentAdTypeID" Nullable="true" />
+          <Property Type="String" Name="ParentAdType" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="AdTypeID" Nullable="true" />
+          <Property Type="String" Name="AdType" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="EditionTypeID" Nullable="true" />
+          <Property Type="String" Name="EditionType" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="RateTypeID" Nullable="true" />
+          <Property Type="String" Name="RateType" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="Rate" Nullable="true" Precision="12" Scale="2" />
+          <Property Type="Decimal" Name="CPM" Nullable="true" Precision="12" Scale="2" />
+          <Property Type="String" Name="PublisherAgreement" Nullable="true" MaxLength="3" />
+          <Property Type="Int32" Name="OpenProductionCost" Nullable="true" />
+          <Property Type="Int32" Name="EarnedProductionCost" Nullable="true" />
+          <Property Type="Decimal" Name="EarnedNEP" Nullable="true" Precision="4" Scale="2" />
+          <Property Type="Int32" Name="RateBaseCirculationGuarantee" Nullable="true" />
+          <Property Type="Int32" Name="AveragePrintRun" Nullable="true" />
+          <Property Type="Decimal" Name="AdvertorialEarnedPercentDiscount" Nullable="true" Precision="4" Scale="2" />
+          <Property Type="Decimal" Name="BleedOpenPercentPremium" Nullable="true" Precision="4" Scale="2" />
+          <Property Type="Decimal" Name="BleedEarnedPercentPremium" Nullable="true" Precision="4" Scale="2" />
+          <Property Type="Decimal" Name="Cover2OpenPercentPremium" Nullable="true" Precision="4" Scale="2" />
+          <Property Type="Decimal" Name="Cover2EarnedPercentPremium" Nullable="true" Precision="4" Scale="2" />
+          <Property Type="Decimal" Name="Cover3OpenPercentPremium" Nullable="true" Precision="4" Scale="2" />
+          <Property Type="Decimal" Name="Cover3EarnedPercentPremium" Nullable="true" Precision="4" Scale="2" />
+          <Property Type="Decimal" Name="Cover4OpenPercentPremium" Nullable="true" Precision="4" Scale="2" />
+          <Property Type="Decimal" Name="Cover4EarnedPercentPremium" Nullable="true" Precision="4" Scale="2" />
+          <Property Type="Decimal" Name="FracHalfPageOpenPercentPremium" Nullable="true" Precision="4" Scale="2" />
+          <Property Type="Decimal" Name="FracHalfPageEarnedPercentPremium" Nullable="true" Precision="4" Scale="2" />
+          <Property Type="Decimal" Name="FracThirdPageOpenPercentPremium" Nullable="true" Precision="4" Scale="2" />
+          <Property Type="Decimal" Name="FracThirdPageEarnedPercentPremium" Nullable="true" Precision="4" Scale="2" />
+          <Property Type="Decimal" Name="FracThirdRunOppFBPOpenPercentPremium" Nullable="true" Precision="4" Scale="2" />
+          <Property Type="Decimal" Name="FracThirdRunOppFBPEarnedPercentPremium" Nullable="true" Precision="4" Scale="2" />
+          <Property Type="Decimal" Name="SpreadC2P1EarnedPercentDiscount" Nullable="true" Precision="4" Scale="2" />
+          <Property Type="Decimal" Name="SpreadROBEarnedPercentDiscount" Nullable="true" Precision="4" Scale="2" />
+          <Property Type="Int32" Name="FifthColorMetallicOpenDollarPremium" Nullable="true" />
+          <Property Type="Int32" Name="FifthColorMetallicEarnedDollarPremium" Nullable="true" />
+          <Property Type="Int32" Name="FifthColorMatchOpenDollarPremium" Nullable="true" />
+          <Property Type="Int32" Name="FifthColorMatchEarnedDollarPremium" Nullable="true" />
+          <Property Type="Int32" Name="FifthColorPMSOpenDollarPremium" Nullable="true" />
+          <Property Type="Int32" Name="FifthColorPMSEarnedDollarPremium" Nullable="true" />
+          <Property Type="Int32" Name="VersionID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetTabletRates_Result">
+          <Property Type="String" Name="TabletParentFunctionality" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TabletFunctionality" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="TabletFunctionalityID" Nullable="false" />
+          <Property Type="Int32" Name="EarnedRate" Nullable="true" />
+          <Property Type="Int32" Name="OpenRate" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="TabletRate">
+          <Key>
+            <PropertyRef Name="TabletRateID" />
+          </Key>
+          <Property Name="TabletRateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Year" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="BookID" Type="Int32" Nullable="false" />
+          <Property Name="TabletFunctionalityID" Type="Int32" Nullable="false" />
+          <Property Name="OpenRate" Type="Int32" />
+          <Property Name="EarnedRate" Type="Int32" />
+          <Property Name="VersionID" Type="Int32" Nullable="false" />
+          <Property Name="Load_Date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="EditorialCalendar">
+          <Key>
+            <PropertyRef Name="EditorialCalendarID" />
+          </Key>
+          <Property Name="EditorialCalendarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Year" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="BookID" Type="Int32" Nullable="false" />
+          <Property Name="IssueDate" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EditorialTheme" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="OnSaleDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="MailToSubscribersDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SpaceClosingDate_ROB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SpaceClosingDate_Covers" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SpaceClosingDate_ScentStrips" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="MaterialsClosingDate_ROB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="MaterialsClosingDate_Covers" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="MaterialsClosingDate_ScentStrips" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="VersionID" Type="Int32" Nullable="false" />
+          <Property Name="Load_Date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="ProductionCostNEP">
+          <Key>
+            <PropertyRef Name="ProductionCostNEPID" />
+          </Key>
+          <Property Name="ProductionCostNEPID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Year" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="BookID" Type="Int32" Nullable="false" />
+          <Property Name="AdTypeID" Type="Int32" Nullable="false" />
+          <Property Name="EditionTypeID" Type="Int32" Nullable="false" />
+          <Property Name="OpenProductionCost" Type="Int32" />
+          <Property Name="EarnedProductionCost" Type="Int32" />
+          <Property Name="EarnedNEP" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="VersionID" Type="Int32" Nullable="false" />
+          <Property Name="Load_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AdType" Relationship="Loreal_DEVRatesModel.FK_ProductionCostNEP_To_AdType_Year_AdTypeID" FromRole="ProductionCostNEP" ToRole="AdType" />
+          <NavigationProperty Name="EditionType" Relationship="Loreal_DEVRatesModel.FK_ProductionCostNEP_To_EditionType_Year_EditionTypeID" FromRole="ProductionCostNEP" ToRole="EditionType" />
+        </EntityType>
+        <Association Name="FK_ProductionCostNEP_To_AdType_Year_AdTypeID">
+          <End Type="Loreal_DEVRatesModel.AdType" Role="AdType" Multiplicity="1" />
+          <End Type="Loreal_DEVRatesModel.ProductionCostNEP" Role="ProductionCostNEP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdType">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="AdTypeID" />
+            </Principal>
+            <Dependent Role="ProductionCostNEP">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="AdTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductionCostNEP_To_EditionType_Year_EditionTypeID">
+          <End Type="Loreal_DEVRatesModel.EditionType" Role="EditionType" Multiplicity="1" />
+          <End Type="Loreal_DEVRatesModel.ProductionCostNEP" Role="ProductionCostNEP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EditionType">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="EditionTypeID" />
+            </Principal>
+            <Dependent Role="ProductionCostNEP">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="EditionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PremiumDiscountRate">
+          <Key>
+            <PropertyRef Name="PremiumDiscountRateID" />
+          </Key>
+          <Property Name="PremiumDiscountRateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Year" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="BookID" Type="Int32" Nullable="false" />
+          <Property Name="AdvertorialEarnedPercentDiscount" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="BleedOpenPercentPremium" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="BleedEarnedPercentPremium" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="Cover2OpenPercentPremium" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="Cover2EarnedPercentPremium" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="Cover3OpenPercentPremium" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="Cover3EarnedPercentPremium" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="Cover4OpenPercentPremium" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="Cover4EarnedPercentPremium" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="FracHalfPageOpenPercentPremium" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="FracHalfPageEarnedPercentPremium" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="FracThirdPageOpenPercentPremium" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="FracThirdPageEarnedPercentPremium" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="FracThirdRunOppFBPOpenPercentPremium" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="FracThirdRunOppFBPEarnedPercentPremium" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="SpreadC2P1EarnedPercentDiscount" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="SpreadROBEarnedPercentDiscount" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="FifthColorMetallicOpenDollarPremium" Type="Int32" />
+          <Property Name="FifthColorMetallicEarnedDollarPremium" Type="Int32" />
+          <Property Name="FifthColorMatchOpenDollarPremium" Type="Int32" />
+          <Property Name="FifthColorMatchEarnedDollarPremium" Type="Int32" />
+          <Property Name="FifthColorPMSOpenDollarPremium" Type="Int32" />
+          <Property Name="FifthColorPMSEarnedDollarPremium" Type="Int32" />
+          <Property Name="VersionID" Type="Int32" Nullable="false" />
+          <Property Name="Load_Date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Rate">
+          <Key>
+            <PropertyRef Name="RateID" />
+          </Key>
+          <Property Name="RateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Year" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="BookID" Type="Int32" Nullable="false" />
+          <Property Name="AdTypeID" Type="Int32" Nullable="false" />
+          <Property Name="EditionTypeID" Type="Int32" Nullable="false" />
+          <Property Name="RateTypeID" Type="Int32" Nullable="false" />
+          <Property Name="TierID" Type="Int32" Nullable="false" />
+          <Property Name="Rate1" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="OpenOrEarned" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="CPM" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="PublisherAgreement" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="IsOverriden" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="VersionID" Type="Int32" Nullable="false" />
+          <Property Name="Load_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AdType" Relationship="Loreal_DEVRatesModel.FK_Rate_To_AdType_Year_AdTypeID" FromRole="Rate" ToRole="AdType" />
+          <NavigationProperty Name="EditionType" Relationship="Loreal_DEVRatesModel.FK_Rate_To_EditionType_Year_EditionTypeID" FromRole="Rate" ToRole="EditionType" />
+          <NavigationProperty Name="RateType" Relationship="Loreal_DEVRatesModel.FK_Rate_To_RateType_Year_RateTypeID" FromRole="Rate" ToRole="RateType" />
+          <NavigationProperty Name="Tier" Relationship="Loreal_DEVRatesModel.FK_Rate_To_Tier_Year_BookID_TierID" FromRole="Rate" ToRole="Tier" />
+        </EntityType>
+        <Association Name="FK_Rate_To_AdType_Year_AdTypeID">
+          <End Type="Loreal_DEVRatesModel.AdType" Role="AdType" Multiplicity="1" />
+          <End Type="Loreal_DEVRatesModel.Rate" Role="Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdType">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="AdTypeID" />
+            </Principal>
+            <Dependent Role="Rate">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="AdTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rate_To_EditionType_Year_EditionTypeID">
+          <End Type="Loreal_DEVRatesModel.EditionType" Role="EditionType" Multiplicity="1" />
+          <End Type="Loreal_DEVRatesModel.Rate" Role="Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EditionType">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="EditionTypeID" />
+            </Principal>
+            <Dependent Role="Rate">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="EditionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rate_To_RateType_Year_RateTypeID">
+          <End Type="Loreal_DEVRatesModel.RateType" Role="RateType" Multiplicity="1" />
+          <End Type="Loreal_DEVRatesModel.Rate" Role="Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RateType">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="RateTypeID" />
+            </Principal>
+            <Dependent Role="Rate">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="RateTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rate_To_Tier_Year_BookID_TierID">
+          <End Type="Loreal_DEVRatesModel.Tier" Role="Tier" Multiplicity="1" />
+          <End Type="Loreal_DEVRatesModel.Rate" Role="Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tier">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="BookID" />
+              <PropertyRef Name="TierID" />
+            </Principal>
+            <Dependent Role="Rate">
+              <PropertyRef Name="Year" />
+              <PropertyRef Name="BookID" />
+              <PropertyRef Name="TierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Loreal_DEVRatesModelStoreContainer" CdmEntityContainer="Loreal_DEVEntities6">
+          <EntitySetMapping Name="AdTypes">
+            <EntityTypeMapping TypeName="Loreal_DEVRatesModel.AdType">
+              <MappingFragment StoreEntitySet="AdType">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="ParentAdTypeID" ColumnName="ParentAdTypeID" />
+                <ScalarProperty Name="AdTypeID" ColumnName="AdTypeID" />
+                <ScalarProperty Name="AdType1" ColumnName="AdType" />
+                <ScalarProperty Name="Load_Date" ColumnName="Load_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookToRateTypes">
+            <EntityTypeMapping TypeName="Loreal_DEVRatesModel.BookToRateType">
+              <MappingFragment StoreEntitySet="BookToRateType">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="RateTypeID" ColumnName="RateTypeID" />
+                <ScalarProperty Name="Load_Date" ColumnName="Load_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EditionTypes">
+            <EntityTypeMapping TypeName="Loreal_DEVRatesModel.EditionType">
+              <MappingFragment StoreEntitySet="EditionType">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="EditionTypeID" ColumnName="EditionTypeID" />
+                <ScalarProperty Name="EditionType1" ColumnName="EditionType" />
+                <ScalarProperty Name="Load_Date" ColumnName="Load_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="Loreal_DEVRatesModel.Genre">
+              <MappingFragment StoreEntitySet="Genre">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+                <ScalarProperty Name="Genre1" ColumnName="Genre" />
+                <ScalarProperty Name="AvgVerifiedCircPercent" ColumnName="AvgVerifiedCircPercent" />
+                <ScalarProperty Name="Load_Date" ColumnName="Load_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParentAdTypes">
+            <EntityTypeMapping TypeName="Loreal_DEVRatesModel.ParentAdType">
+              <MappingFragment StoreEntitySet="ParentAdType">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="ParentAdTypeID" ColumnName="ParentAdTypeID" />
+                <ScalarProperty Name="ParentAdType1" ColumnName="ParentAdType" />
+                <ScalarProperty Name="Load_Date" ColumnName="Load_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Publishers">
+            <EntityTypeMapping TypeName="Loreal_DEVRatesModel.Publisher">
+              <MappingFragment StoreEntitySet="Publisher">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="PublisherID" ColumnName="PublisherID" />
+                <ScalarProperty Name="Publisher1" ColumnName="Publisher" />
+                <ScalarProperty Name="IsMain" ColumnName="IsMain" />
+                <ScalarProperty Name="Load_Date" ColumnName="Load_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RateTypes">
+            <EntityTypeMapping TypeName="Loreal_DEVRatesModel.RateType">
+              <MappingFragment StoreEntitySet="RateType">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="RateTypeID" ColumnName="RateTypeID" />
+                <ScalarProperty Name="RateType1" ColumnName="RateType" />
+                <ScalarProperty Name="Load_Date" ColumnName="Load_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tiers">
+            <EntityTypeMapping TypeName="Loreal_DEVRatesModel.Tier">
+              <MappingFragment StoreEntitySet="Tier">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="TierID" ColumnName="TierID" />
+                <ScalarProperty Name="TierStart" ColumnName="TierStart" />
+                <ScalarProperty Name="TierEnd" ColumnName="TierEnd" />
+                <ScalarProperty Name="TierBase" ColumnName="TierBase" />
+                <ScalarProperty Name="IsFlat" ColumnName="IsFlat" />
+                <ScalarProperty Name="Load_Date" ColumnName="Load_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CirculationGuarantees">
+            <EntityTypeMapping TypeName="Loreal_DEVRatesModel.CirculationGuarantee">
+              <MappingFragment StoreEntitySet="CirculationGuarantee">
+                <ScalarProperty Name="Load_Date" ColumnName="Load_Date" />
+                <ScalarProperty Name="VersionID" ColumnName="VersionID" />
+                <ScalarProperty Name="AveragePrintRun" ColumnName="AveragePrintRun" />
+                <ScalarProperty Name="RateBaseCirculationGuarantee" ColumnName="RateBaseCirculationGuarantee" />
+                <ScalarProperty Name="EditionTypeID" ColumnName="EditionTypeID" />
+                <ScalarProperty Name="ParentAdTypeID" ColumnName="ParentAdTypeID" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="CirculationGuaranteeID" ColumnName="CirculationGuaranteeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetRatesEndReport" FunctionName="Loreal_DEVRatesModel.Store.GetRatesEndReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Loreal_DEVRatesModel.GetRatesEndReport_Result">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="TierID" ColumnName="TierID" />
+                <ScalarProperty Name="Tier" ColumnName="Tier" />
+                <ScalarProperty Name="TierRange" ColumnName="TierRange" />
+                <ScalarProperty Name="ParentAdTypeID" ColumnName="ParentAdTypeID" />
+                <ScalarProperty Name="ParentAdType" ColumnName="ParentAdType" />
+                <ScalarProperty Name="AdTypeID" ColumnName="AdTypeID" />
+                <ScalarProperty Name="AdType" ColumnName="AdType" />
+                <ScalarProperty Name="EditionTypeID" ColumnName="EditionTypeID" />
+                <ScalarProperty Name="EditionType" ColumnName="EditionType" />
+                <ScalarProperty Name="RateTypeID" ColumnName="RateTypeID" />
+                <ScalarProperty Name="RateType" ColumnName="RateType" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="PublisherAgreement" ColumnName="PublisherAgreement" />
+                <ScalarProperty Name="VersionID" ColumnName="VersionID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Circulations">
+            <EntityTypeMapping TypeName="Loreal_DEVRatesModel.Circulation">
+              <MappingFragment StoreEntitySet="Circulation">
+                <ScalarProperty Name="Load_Date" ColumnName="Load_Date" />
+                <ScalarProperty Name="VersionID" ColumnName="VersionID" />
+                <ScalarProperty Name="DigitalNonReplicaCirculation" ColumnName="DigitalNonReplicaCirculation" />
+                <ScalarProperty Name="DigitalReplicaCirculation" ColumnName="DigitalReplicaCirculation" />
+                <ScalarProperty Name="PrintCirculation" ColumnName="PrintCirculation" />
+                <ScalarProperty Name="CirculationSubTypeID" ColumnName="CirculationSubTypeID" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="CirculationID" ColumnName="CirculationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetCirculation" FunctionName="Loreal_DEVRatesModel.Store.GetCirculation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Loreal_DEVRatesModel.GetCirculation_Result">
+                <ScalarProperty Name="CirculationGroupType" ColumnName="CirculationGroupType" />
+                <ScalarProperty Name="CirculationType" ColumnName="CirculationType" />
+                <ScalarProperty Name="CirculationSubType" ColumnName="CirculationSubType" />
+                <ScalarProperty Name="CirculationSubTypeID" ColumnName="CirculationSubTypeID" />
+                <ScalarProperty Name="PrintCirculation" ColumnName="PrintCirculation" />
+                <ScalarProperty Name="DigitalReplicaCirculation" ColumnName="DigitalReplicaCirculation" />
+                <ScalarProperty Name="DigitalNonReplicaCirculation" ColumnName="DigitalNonReplicaCirculation" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetRates" FunctionName="Loreal_DEVRatesModel.Store.GetRates">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Loreal_DEVRatesModel.GetRates_Result">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="TierID" ColumnName="TierID" />
+                <ScalarProperty Name="Tier" ColumnName="Tier" />
+                <ScalarProperty Name="TierRange" ColumnName="TierRange" />
+                <ScalarProperty Name="ParentAdTypeID" ColumnName="ParentAdTypeID" />
+                <ScalarProperty Name="ParentAdType" ColumnName="ParentAdType" />
+                <ScalarProperty Name="AdTypeID" ColumnName="AdTypeID" />
+                <ScalarProperty Name="AdType" ColumnName="AdType" />
+                <ScalarProperty Name="EditionTypeID" ColumnName="EditionTypeID" />
+                <ScalarProperty Name="EditionType" ColumnName="EditionType" />
+                <ScalarProperty Name="RateTypeID" ColumnName="RateTypeID" />
+                <ScalarProperty Name="RateType" ColumnName="RateType" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="CPM" ColumnName="CPM" />
+                <ScalarProperty Name="PublisherAgreement" ColumnName="PublisherAgreement" />
+                <ScalarProperty Name="OpenProductionCost" ColumnName="OpenProductionCost" />
+                <ScalarProperty Name="EarnedProductionCost" ColumnName="EarnedProductionCost" />
+                <ScalarProperty Name="EarnedNEP" ColumnName="EarnedNEP" />
+                <ScalarProperty Name="RateBaseCirculationGuarantee" ColumnName="RateBaseCirculationGuarantee" />
+                <ScalarProperty Name="AveragePrintRun" ColumnName="AveragePrintRun" />
+                <ScalarProperty Name="AdvertorialEarnedPercentDiscount" ColumnName="AdvertorialEarnedPercentDiscount" />
+                <ScalarProperty Name="BleedOpenPercentPremium" ColumnName="BleedOpenPercentPremium" />
+                <ScalarProperty Name="BleedEarnedPercentPremium" ColumnName="BleedEarnedPercentPremium" />
+                <ScalarProperty Name="Cover2OpenPercentPremium" ColumnName="Cover2OpenPercentPremium" />
+                <ScalarProperty Name="Cover2EarnedPercentPremium" ColumnName="Cover2EarnedPercentPremium" />
+                <ScalarProperty Name="Cover3OpenPercentPremium" ColumnName="Cover3OpenPercentPremium" />
+                <ScalarProperty Name="Cover3EarnedPercentPremium" ColumnName="Cover3EarnedPercentPremium" />
+                <ScalarProperty Name="Cover4OpenPercentPremium" ColumnName="Cover4OpenPercentPremium" />
+                <ScalarProperty Name="Cover4EarnedPercentPremium" ColumnName="Cover4EarnedPercentPremium" />
+                <ScalarProperty Name="FracHalfPageOpenPercentPremium" ColumnName="FracHalfPageOpenPercentPremium" />
+                <ScalarProperty Name="FracHalfPageEarnedPercentPremium" ColumnName="FracHalfPageEarnedPercentPremium" />
+                <ScalarProperty Name="FracThirdPageOpenPercentPremium" ColumnName="FracThirdPageOpenPercentPremium" />
+                <ScalarProperty Name="FracThirdPageEarnedPercentPremium" ColumnName="FracThirdPageEarnedPercentPremium" />
+                <ScalarProperty Name="FracThirdRunOppFBPOpenPercentPremium" ColumnName="FracThirdRunOppFBPOpenPercentPremium" />
+                <ScalarProperty Name="FracThirdRunOppFBPEarnedPercentPremium" ColumnName="FracThirdRunOppFBPEarnedPercentPremium" />
+                <ScalarProperty Name="SpreadC2P1EarnedPercentDiscount" ColumnName="SpreadC2P1EarnedPercentDiscount" />
+                <ScalarProperty Name="SpreadROBEarnedPercentDiscount" ColumnName="SpreadROBEarnedPercentDiscount" />
+                <ScalarProperty Name="FifthColorMetallicOpenDollarPremium" ColumnName="FifthColorMetallicOpenDollarPremium" />
+                <ScalarProperty Name="FifthColorMetallicEarnedDollarPremium" ColumnName="FifthColorMetallicEarnedDollarPremium" />
+                <ScalarProperty Name="FifthColorMatchOpenDollarPremium" ColumnName="FifthColorMatchOpenDollarPremium" />
+                <ScalarProperty Name="FifthColorMatchEarnedDollarPremium" ColumnName="FifthColorMatchEarnedDollarPremium" />
+                <ScalarProperty Name="FifthColorPMSOpenDollarPremium" ColumnName="FifthColorPMSOpenDollarPremium" />
+                <ScalarProperty Name="FifthColorPMSEarnedDollarPremium" ColumnName="FifthColorPMSEarnedDollarPremium" />
+                <ScalarProperty Name="VersionID" ColumnName="VersionID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetTabletRates" FunctionName="Loreal_DEVRatesModel.Store.GetTabletRates">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Loreal_DEVRatesModel.GetTabletRates_Result">
+                <ScalarProperty Name="TabletParentFunctionality" ColumnName="TabletParentFunctionality" />
+                <ScalarProperty Name="TabletFunctionality" ColumnName="TabletFunctionality" />
+                <ScalarProperty Name="TabletFunctionalityID" ColumnName="TabletFunctionalityID" />
+                <ScalarProperty Name="EarnedRate" ColumnName="EarnedRate" />
+                <ScalarProperty Name="OpenRate" ColumnName="OpenRate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="TabletRates">
+            <EntityTypeMapping TypeName="Loreal_DEVRatesModel.TabletRate">
+              <MappingFragment StoreEntitySet="TabletRate">
+                <ScalarProperty Name="Load_Date" ColumnName="Load_Date" />
+                <ScalarProperty Name="VersionID" ColumnName="VersionID" />
+                <ScalarProperty Name="EarnedRate" ColumnName="EarnedRate" />
+                <ScalarProperty Name="OpenRate" ColumnName="OpenRate" />
+                <ScalarProperty Name="TabletFunctionalityID" ColumnName="TabletFunctionalityID" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="TabletRateID" ColumnName="TabletRateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EditorialCalendars">
+            <EntityTypeMapping TypeName="Loreal_DEVRatesModel.EditorialCalendar">
+              <MappingFragment StoreEntitySet="EditorialCalendar">
+                <ScalarProperty Name="Load_Date" ColumnName="Load_Date" />
+                <ScalarProperty Name="VersionID" ColumnName="VersionID" />
+                <ScalarProperty Name="MaterialsClosingDate_ScentStrips" ColumnName="MaterialsClosingDate_ScentStrips" />
+                <ScalarProperty Name="MaterialsClosingDate_Covers" ColumnName="MaterialsClosingDate_Covers" />
+                <ScalarProperty Name="MaterialsClosingDate_ROB" ColumnName="MaterialsClosingDate_ROB" />
+                <ScalarProperty Name="SpaceClosingDate_ScentStrips" ColumnName="SpaceClosingDate_ScentStrips" />
+                <ScalarProperty Name="SpaceClosingDate_Covers" ColumnName="SpaceClosingDate_Covers" />
+                <ScalarProperty Name="SpaceClosingDate_ROB" ColumnName="SpaceClosingDate_ROB" />
+                <ScalarProperty Name="MailToSubscribersDate" ColumnName="MailToSubscribersDate" />
+                <ScalarProperty Name="OnSaleDate" ColumnName="OnSaleDate" />
+                <ScalarProperty Name="EditorialTheme" ColumnName="EditorialTheme" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="EditorialCalendarID" ColumnName="EditorialCalendarID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductionCostNEPs">
+            <EntityTypeMapping TypeName="Loreal_DEVRatesModel.ProductionCostNEP">
+              <MappingFragment StoreEntitySet="ProductionCostNEP">
+                <ScalarProperty Name="Load_Date" ColumnName="Load_Date" />
+                <ScalarProperty Name="VersionID" ColumnName="VersionID" />
+                <ScalarProperty Name="EarnedNEP" ColumnName="EarnedNEP" />
+                <ScalarProperty Name="EarnedProductionCost" ColumnName="EarnedProductionCost" />
+                <ScalarProperty Name="OpenProductionCost" ColumnName="OpenProductionCost" />
+                <ScalarProperty Name="EditionTypeID" ColumnName="EditionTypeID" />
+                <ScalarProperty Name="AdTypeID" ColumnName="AdTypeID" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="ProductionCostNEPID" ColumnName="ProductionCostNEPID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PremiumDiscountRates">
+            <EntityTypeMapping TypeName="Loreal_DEVRatesModel.PremiumDiscountRate">
+              <MappingFragment StoreEntitySet="PremiumDiscountRate">
+                <ScalarProperty Name="Load_Date" ColumnName="Load_Date" />
+                <ScalarProperty Name="VersionID" ColumnName="VersionID" />
+                <ScalarProperty Name="FifthColorPMSEarnedDollarPremium" ColumnName="FifthColorPMSEarnedDollarPremium" />
+                <ScalarProperty Name="FifthColorPMSOpenDollarPremium" ColumnName="FifthColorPMSOpenDollarPremium" />
+                <ScalarProperty Name="FifthColorMatchEarnedDollarPremium" ColumnName="FifthColorMatchEarnedDollarPremium" />
+                <ScalarProperty Name="FifthColorMatchOpenDollarPremium" ColumnName="FifthColorMatchOpenDollarPremium" />
+                <ScalarProperty Name="FifthColorMetallicEarnedDollarPremium" ColumnName="FifthColorMetallicEarnedDollarPremium" />
+                <ScalarProperty Name="FifthColorMetallicOpenDollarPremium" ColumnName="FifthColorMetallicOpenDollarPremium" />
+                <ScalarProperty Name="SpreadROBEarnedPercentDiscount" ColumnName="SpreadROBEarnedPercentDiscount" />
+                <ScalarProperty Name="SpreadC2P1EarnedPercentDiscount" ColumnName="SpreadC2P1EarnedPercentDiscount" />
+                <ScalarProperty Name="FracThirdRunOppFBPEarnedPercentPremium" ColumnName="FracThirdRunOppFBPEarnedPercentPremium" />
+                <ScalarProperty Name="FracThirdRunOppFBPOpenPercentPremium" ColumnName="FracThirdRunOppFBPOpenPercentPremium" />
+                <ScalarProperty Name="FracThirdPageEarnedPercentPremium" ColumnName="FracThirdPageEarnedPercentPremium" />
+                <ScalarProperty Name="FracThirdPageOpenPercentPremium" ColumnName="FracThirdPageOpenPercentPremium" />
+                <ScalarProperty Name="FracHalfPageEarnedPercentPremium" ColumnName="FracHalfPageEarnedPercentPremium" />
+                <ScalarProperty Name="FracHalfPageOpenPercentPremium" ColumnName="FracHalfPageOpenPercentPremium" />
+                <ScalarProperty Name="Cover4EarnedPercentPremium" ColumnName="Cover4EarnedPercentPremium" />
+                <ScalarProperty Name="Cover4OpenPercentPremium" ColumnName="Cover4OpenPercentPremium" />
+                <ScalarProperty Name="Cover3EarnedPercentPremium" ColumnName="Cover3EarnedPercentPremium" />
+                <ScalarProperty Name="Cover3OpenPercentPremium" ColumnName="Cover3OpenPercentPremium" />
+                <ScalarProperty Name="Cover2EarnedPercentPremium" ColumnName="Cover2EarnedPercentPremium" />
+                <ScalarProperty Name="Cover2OpenPercentPremium" ColumnName="Cover2OpenPercentPremium" />
+                <ScalarProperty Name="BleedEarnedPercentPremium" ColumnName="BleedEarnedPercentPremium" />
+                <ScalarProperty Name="BleedOpenPercentPremium" ColumnName="BleedOpenPercentPremium" />
+                <ScalarProperty Name="AdvertorialEarnedPercentDiscount" ColumnName="AdvertorialEarnedPercentDiscount" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="PremiumDiscountRateID" ColumnName="PremiumDiscountRateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rates">
+            <EntityTypeMapping TypeName="Loreal_DEVRatesModel.Rate">
+              <MappingFragment StoreEntitySet="Rate">
+                <ScalarProperty Name="Load_Date" ColumnName="Load_Date" />
+                <ScalarProperty Name="VersionID" ColumnName="VersionID" />
+                <ScalarProperty Name="IsOverriden" ColumnName="IsOverriden" />
+                <ScalarProperty Name="PublisherAgreement" ColumnName="PublisherAgreement" />
+                <ScalarProperty Name="CPM" ColumnName="CPM" />
+                <ScalarProperty Name="OpenOrEarned" ColumnName="OpenOrEarned" />
+                <ScalarProperty Name="Rate1" ColumnName="Rate" />
+                <ScalarProperty Name="TierID" ColumnName="TierID" />
+                <ScalarProperty Name="RateTypeID" ColumnName="RateTypeID" />
+                <ScalarProperty Name="EditionTypeID" ColumnName="EditionTypeID" />
+                <ScalarProperty Name="AdTypeID" ColumnName="AdTypeID" />
+                <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="RateID" ColumnName="RateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ValidateAllInputs" FunctionName="Loreal_DEVRatesModel.Store.ValidateAllInputs" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram DiagramId="1eaf4a60616b4b8197f14608379e7607" Name="Diagram1">
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.AdType" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.Book" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.BookToRateType" Width="1.5" PointX="8.25" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.EditionType" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.Genre" Width="1.5" PointX="0.75" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.ParentAdType" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.PremiumDiscountRate" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.Publisher" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.RateType" Width="1.5" PointX="6" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.Tier" Width="1.5" PointX="5.25" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.CirculationGuarantee" Width="1.5" PointX="8.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.ProductionCostNEP" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.V_Tier" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.V_TierByParentAdType" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.Rate" Width="1.5" PointX="7.5" PointY="15.375" IsExpanded="true" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_AdType_To_ParentAdType_Year_ParentAdTypeID" ManuallyRouted="false" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_Book_To_Genre_Year_GenreID" ManuallyRouted="false" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_Book_To_Publisher_Year_PublisherID" ManuallyRouted="false" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_BookToRateType_To_Book_Year_BookID" ManuallyRouted="false" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_PremiumDiscountRate_To_Book_Year_BookID" ManuallyRouted="false" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_Tier_To_Book_Year_BookID" ManuallyRouted="false" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_BookToRateType_To_RateType_Year_RateTypeID" ManuallyRouted="false" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_CirculationGuarantee_To_Book_Year_BookID" ManuallyRouted="false" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_CirculationGuarantee_To_EditionType_Year_EditionTypeID" ManuallyRouted="false" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_CirculationGuarantee_To_ParentAdType_Year_ParentAdTypeID" ManuallyRouted="false" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_ProductionCostNEP_To_AdType_Year_AdTypeID" ManuallyRouted="false" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_ProductionCostNEP_To_Book_Year_BookID" ManuallyRouted="false" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_ProductionCostNEP_To_EditionType_Year_EditionTypeID" ManuallyRouted="false" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_Rate_To_AdType_Year_AdTypeID" ManuallyRouted="false" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_Rate_To_Book_Year_BookID" ManuallyRouted="false" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_Rate_To_EditionType_Year_EditionTypeID" ManuallyRouted="false" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_Rate_To_RateType_Year_RateTypeID" ManuallyRouted="false" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_Rate_To_Tier_Year_BookID_TierID" ManuallyRouted="false" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

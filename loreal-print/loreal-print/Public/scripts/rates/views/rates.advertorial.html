@@ -1,0 +1,36 @@
+﻿<p class="text-left red font-12"><u>***Please note, all dollar references are for Net US dollars.***</u></p>
+
+<div class="row">
+    <div class="col-sm-12 font-12 red">
+        <ul>
+            <li>Advertorial production/creative fees can vary greatly based on creative needs. Therefore, the rates you supply below are for space costs only. 
+            The advertorial creative costs should be discussed directly with the Divisions.</li>
+            <li>Please note that L'Oréal USA typically pays a space cost that is significantly less than the earned P4CB rate. Should your publication choose not to offer an aggressive discount, 
+            it may affect whether your title receives advertorial units in 2017 (depending upon the situation and additional costs).</li>
+            <li>As a reminder for Advertorials, please do not include the Digital Replica Circulation as a part of the Rate Base.</li>
+        </ul>
+    </div>
+</div>
+
+<br />
+
+<form class="form-inline">
+    <div class="row font-12">
+        <div class="form-group col-sm-6 text-right">
+            <label class="red">Advertorial NEP Value:</label>
+            <input type="number"
+                   ng-model="vm.ratesData.RateParentAdTypes[0].RateRateTypes[0].RateAdTypes[0].RateTiers[0].RateEditionTypes[0].EarnedNEP"
+                   class="form-control"/>
+        </div>
+    </div>
+
+    <div class="row font-12">
+        <div class="form-group col-sm-6 text-right">
+            <label class="red"> Advertorial Discount off of <br /> L'Oréal USA Earned NET Page Rate:</label>
+            <input type="number"
+                    class="form-control"
+                    ng-model="vm.parentP4C.AdvertorialEarnedPercentDiscount" />
+        </div>
+    </div>
+</form>
+

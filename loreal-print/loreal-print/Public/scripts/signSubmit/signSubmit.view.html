@@ -1,0 +1,41 @@
+﻿
+<div class="panel panel-primary">
+    <div class="panel-heading text-center">
+        <h3>Sign & Submit</h3>
+    </div>
+
+    <div class="panel-body">
+
+        <div class="row">
+            <div ng-show="vm.validationArray.length>0" class="panel col-sm-offset-2 col-sm-8">
+                <div class="validation-header panel-heading">
+                    <h4><b><u>Before you can submit, please complete the following:</u></b></h4>
+                </div>
+                <div class="validation-table panel-body panel-validate">
+                    <table class="table table-condensed table-bordered table-striped">
+                        <tbody>
+                            <tr ng-repeat="item in vm.validationArray">
+                                <td>{{item}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="ng-cloak" ng-if="!vm.validationArray.length">
+            <div ng-if="!vm.validationArray.length" class="alert alert-success" role="alert">All the fields have been properly filled out. You can Save a Copy as a PDF!</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-offset-8">
+                <button ng-disabled="vm.validationArray.length>0" type="submit" class="btn btn-primary" ng-click="vm.printPDF()">
+                    Print PDF
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div ng-hide="vm.loadHide">
+    <toaster-container toaster-options="{'position-class': 'toast-center', 'time-out': 30000, 'limit':1, 'close-button': false, 'toaster-id': 3}"></toaster-container>
+</div>

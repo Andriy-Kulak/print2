@@ -1,0 +1,259 @@
+﻿<h1 class="text-center"><u>Editorial Calendar</u></h1>
+
+<div class="container-fluid">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+
+            </div>
+            <div class="panel-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-8 editorial-cal-left-margin">
+                            <table class="table table-striped table-condensed table-bordered table-hover font-10">
+                                <thead>
+                                    <tr>
+                                        <th class="calendar-width-lg">Issue Date</th>
+                                        <th class="calendar-width-lg">Editorial Theme</th>
+                                        <th class="calendar-width">On Sale Date</th>
+                                        <th class="calendar-width">Mail to Subscribers Date</th>
+                                        <th class="calendar-width">Space Closing Date - Scent Strips</th>                                       
+                                        <th class="calendar-width">Space Closing Date - Covers</th>
+                                        <th class="calendar-width">Space Closing Date - ROB</th>
+                                        <th class="calendar-width">Materials Closing Date - Scent Strips</th>                                       
+                                        <th class="calendar-width">Materials Closing Date - Covers</th>
+                                        <th class="calendar-width">Materials Closing Date - ROB</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="record in vm.records" ng-form="vm.calRow[$index]"> <!-- ng-change="vm.addCalArray(record)"-->
+                                        <!-- Issue Date -->
+                                        <td>
+                                        <input class="calendar-width-lg"
+                                               name="IssueDate"
+                                               ng-model="record.IssueDate"
+                                               required/>
+                                            
+                                            <div>
+                                                <span class="label-danger white-text"
+                                                      ng-show="!vm.calRow[$index].IssueDate.$valid && vm.calRow[$index].IssueDate.$touched">*Required field<br /></span>
+                                            </div>
+                                        </td>
+                                        <!-- Editorial Theme -->
+                                        <td>
+                                            <input class="calendar-width-lg"
+                                                   ng-change="vm.rowTouched[$index]=true"
+                                                   name="EditorialTheme"
+                                                   ng-model="record.EditorialTheme"
+                                                   required/>                                           
+
+                                            <div>
+                                                <span class="label-danger white-text"
+                                                      ng-show="!vm.calRow[$index].EditorialTheme.$valid && vm.calRow[$index].EditorialTheme.$touched">*Required field<br /></span>
+                                            </div>                                                              
+                                        </td>
+                                        <!-- On Sale Date -->
+                                        <td>
+                                            <input class="calendar-width"
+                                                   ng-change="vm.rowTouched[$index]=true"
+                                                   name="OnSaleDate"
+                                                   ng-model="record.OnSaleDate"
+                                                   ng-pattern="/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/" required/>
+                                            <div>
+                                                <span class="label-danger white-text"
+                                                      ng-show="!vm.calRow[$index].OnSaleDate.$valid && vm.calRow[$index].OnSaleDate.$touched">*Use mm/dd/yyyy format<br /></span>
+                                            </div>                               
+                                        </td>
+                                        <!-- Mail to Subscribers Date -->
+                                        <td>
+                                            <input class="calendar-width"
+                                                   ng-change="vm.rowTouched[$index]=true"
+                                                   name="MailToSubscribersDate"
+                                                   ng-model="record.MailToSubscribersDate"
+                                                   ng-pattern="/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/" required/>
+                                            <div>
+                                                <span class="label-danger white-text"
+                                                      ng-show="!vm.calRow[$index].MailToSubscribersDate.$valid && vm.calRow[$index].MailToSubscribersDate.$touched">*Use mm/dd/yyyy format<br /></span>
+                                            </div>                          
+                                        </td>
+                                        <!-- Space Closing Date - Scent Strips -->
+                                        <td>
+                                            <input class="calendar-width"
+                                                   ng-change="vm.rowTouched[$index]=true"
+                                                   name="SpaceClosingDateScentStrips"
+                                                   ng-model="record.SpaceClosingDateScentStrips"
+                                                   ng-pattern="/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/" required />
+                                            <div>
+                                                <span class="label-danger white-text"
+                                                      ng-show="!vm.calRow[$index].SpaceClosingDateScentStrips.$valid && vm.calRow[$index].SpaceClosingDateScentStrips.$touched">*Use mm/dd/yyyy format<br /></span>
+                                            </div>
+                                        </td>
+
+                                        <!-- Space Closing Date - Covers -->
+                                        <td>
+                                            <input class="calendar-width"
+                                                   ng-change="vm.rowTouched[$index]=true"
+                                                   name="SpaceClosingDateCovers"
+                                                   ng-model="record.SpaceClosingDateCovers"
+                                                   ng-pattern="/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/" required/>
+                                            <div>
+                                                <span class="label-danger white-text"
+                                                      ng-show="!vm.calRow[$index].SpaceClosingDateCovers.$valid && vm.calRow[$index].SpaceClosingDateCovers.$touched">*Use mm/dd/yyyy format<br /></span>
+                                            </div>                                      
+                                        </td>
+                                        <!-- Space Closing Date - ROB -->
+                                        <td>
+                                            <input class="calendar-width"
+                                                   ng-change="vm.rowTouched[$index]=true"
+                                                   name="SpaceClosingDateROB"
+                                                   ng-model="record.SpaceClosingDateROB"
+                                                   ng-pattern="/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/" required />
+                                            <div>
+                                                <span class="label-danger white-text"
+                                                      ng-show="!vm.calRow[$index].SpaceClosingDateROB.$valid && vm.calRow[$index].SpaceClosingDateROB.$touched">*Use mm/dd/yyyy format<br /></span>
+                                            </div>
+                                        </td>
+                                        <!-- Materials Closing Date - Scent Strips -->
+                                        <td>
+                                            <input class="calendar-width"
+                                                   ng-change="vm.rowTouched[$index]=true"
+                                                   name="MaterialsClosingDateScentStrips"
+                                                   ng-model="record.MaterialsClosingDateScentStrips"
+                                                   ng-pattern="/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/" required />
+                                            <div>
+                                                <span class="label-danger white-text"
+                                                      ng-show="!vm.calRow[$index].MaterialsClosingDateScentStrips.$valid && vm.calRow[$index].MaterialsClosingDateScentStrips.$touched">*Use mm/dd/yyyy format<br /></span>
+                                            </div>
+                                        </td>
+
+                                        <!-- Materials Closing Date - Covers -->
+                                        <td>
+                                            <input class="calendar-width"
+                                                   ng-change="vm.rowTouched[$index]=true"
+                                                   name="MaterialsClosingDateCovers"
+                                                   ng-model="record.MaterialsClosingDateCovers"
+                                                   ng-pattern="/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/" required/>
+                                            <div>
+                                                <span class="label-danger white-text"
+                                                      ng-show="!vm.calRow[$index].MaterialsClosingDateCovers.$valid && vm.calRow[$index].MaterialsClosingDateCovers.$touched">*Use mm/dd/yyyy format<br /></span>
+                                            </div>
+                                        </td>
+
+                                        <!-- Materials Closing Date - ROB -->
+                                        <td>
+                                            <input class="calendar-width"
+                                                   ng-change="vm.rowTouched[$index]=true"
+                                                   name="MaterialsClosingDateROB"
+                                                   ng-model="record.MaterialsClosingDateROB"
+                                                   ng-pattern="/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/" required />
+                                            <div>
+                                                <span class="label-danger white-text"
+                                                      ng-show="!vm.calRow[$index].MaterialsClosingDateROB.$valid && vm.calRow[$index].MaterialsClosingDateROB.$touched">*Use mm/dd/yyyy format<br /></span>
+                                            </div>
+                                        </td>
+
+                                        <td ng-show="vm.rowTouched[$index]"><button type="submit" ng-click="vm.saveEditorialCalendar(record, vm.calRow[$index].$valid)" class="btn btn-xs btn-primary">Update</button></td>
+                                        <td><button type="submit" ng-click="(record.Delete=true) && (vm.cofirmDelete(record))" class="btn btn-xs btn-danger">Delete</button></td>
+                                    </tr>
+                                </tbody>
+
+                                <!-- table body for a new addition -->
+                                <tbody>
+                                    <tr ng-form="vm.newCal">
+                                        <!-- Issue Date -->
+                                        <td>
+                                            <input class="calendar-width-lg" name="IssueDate" ng-model="vm.calendarRecord.IssueDate" required/>
+                                            <div>
+                                                <span class="label-danger white-text"
+                                                      ng-show="!vm.newCal.IssueDate.$valid && vm.newCal.IssueDate.$touched">*Required Field<br /></span>
+                                            </div>
+                                        </td>
+                                        <!-- Editorial Theme -->
+                                        <td><input name="EditorialTheme" class="calendar-width-lg" ng-model="vm.calendarRecord.EditorialTheme" required/>
+                                            <div>
+                                                <span class="label-danger white-text"
+                                                      ng-show="!vm.newCal.EditorialTheme.$valid && vm.newCal.EditorialTheme.$touched">*Required Field<br /></span>
+                                            </div>
+                                        </td>
+                                        <!-- On Sale Date -->
+                                        <td>
+                                        <input placeholder="mm/dd/yyyy" name="OnSaleDate" class="calendar-width" ng-model="vm.calendarRecord.OnSaleDate" ng-pattern="/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/" required/>
+                                            <div>
+                                                <span class="label-danger white-text"
+                                                      ng-show="!vm.newCal.OnSaleDate.$valid && vm.newCal.OnSaleDate.$touched">*Use mm/dd/yyyy format<br /></span>
+                                            </div>
+                                        </td>
+                                        <!-- Mail to Subscribers Date -->
+                                        <td>
+                                        <input placeholder="mm/dd/yyyy" name="MailToSubscribersDate" class="calendar-width" ng-model="vm.calendarRecord.MailToSubscribersDate" ng-pattern="/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/" required/>
+                                            <div>
+                                                <span class="label-danger white-text"
+                                                      ng-show="!vm.newCal.MailToSubscribersDate.$valid && vm.newCal.MailToSubscribersDate.$touched">*Use mm/dd/yyyy format<br /></span>
+                                            </div>
+                                        </td>
+                                        <!-- Space Closing Date - Scent Strips -->
+                                        <td>
+                                            <input placeholder="mm/dd/yyyy" name="SpaceClosingDateScentStrips" class="calendar-width" ng-model="vm.calendarRecord.SpaceClosingDateScentStrips" ng-pattern="/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/" required />
+                                            <div>
+                                                <span class="label-danger white-text"
+                                                      ng-show="!vm.newCal.SpaceClosingDateScentStrips.$valid && vm.newCal.SpaceClosingDateScentStrips.$touched">*Use mm/dd/yyyy format<br /></span>
+                                            </div>
+                                        </td>
+                                        <!-- Space Closing Date - Covers -->
+                                        <td>
+                                        <input placeholder="mm/dd/yyyy" name="SpaceClosingDateCovers" class="calendar-width" ng-model="vm.calendarRecord.SpaceClosingDateCovers" ng-pattern="/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/" required/>
+                                            <div>
+                                                <span class="label-danger white-text"
+                                                      ng-show="!vm.newCal.SpaceClosingDateCovers.$valid && vm.newCal.SpaceClosingDateCovers.$touched">*Use mm/dd/yyyy format<br /></span>
+                                            </div>
+                                        </td>
+                                        <!-- Space Closing Date - ROB -->
+                                        <td>
+                                            <input placeholder="mm/dd/yyyy" name="SpaceClosingDateROB" class="calendar-width" ng-model="vm.calendarRecord.SpaceClosingDateROB" ng-pattern="/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/" required />
+                                            <div>
+                                                <span class="label-danger white-text"
+                                                      ng-show="!vm.newCal.SpaceClosingDateROB.$valid && vm.newCal.SpaceClosingDateROB.$touched">*Use mm/dd/yyyy format<br /></span>
+                                            </div>
+                                        </td>
+                                        <!-- Materials Closing Date - Scent Strips -->
+                                        <td>
+                                            <input placeholder="mm/dd/yyyy" name="MaterialsClosingDateScentStrips" class="calendar-width" ng-model="vm.calendarRecord.MaterialsClosingDateScentStrips" ng-pattern="/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/" required />
+                                            <div>
+                                                <span class="label-danger white-text"
+                                                      ng-show="!vm.newCal.MaterialsClosingDateScentStrips.$valid && vm.newCal.MaterialsClosingDateScentStrips.$touched">*Use mm/dd/yyyy format<br /></span>
+                                            </div>
+                                        </td>
+                                        <!-- Materials Closing Date - Covers -->
+                                        <td>
+                                            <input placeholder="mm/dd/yyyy" name="MaterialsClosingDateCovers" class="calendar-width" ng-model="vm.calendarRecord.MaterialsClosingDateCovers" ng-pattern="/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/" required/>
+                                            <div>
+                                                <span class="label-danger white-text"
+                                                      ng-show="!vm.newCal.MaterialsClosingDateCovers.$valid && vm.newCal.MaterialsClosingDateCovers.$touched">*Use mm/dd/yyyy format<br /></span>
+                                            </div>
+                                        </td>
+                                        <!-- Materials Closing Date - ROB -->
+                                        <td>
+                                            <input placeholder="mm/dd/yyyy" name="MaterialsClosingDateROB" class="calendar-width" ng-model="vm.calendarRecord.MaterialsClosingDateROB" ng-pattern="/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/" required />
+                                            <div>
+                                                <span class="label-danger white-text"
+                                                      ng-show="!vm.newCal.MaterialsClosingDateROB.$valid && vm.newCal.MaterialsClosingDateROB.$touched">*Use mm/dd/yyyy format<br /></span>
+                                            </div>
+                                        </td>
+                                        <td><button type="submit" ng-click="vm.saveEditorialCalendar(vm.calendarRecord)" class="btn btn-xs btn-success">Add</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="panel-footer">
+                <div class="row">
+                    <button class="btn-group-sm btn-primary pull-right table-button" type="submit" ng-click="vm.saveEditorialCalendar(vm.editorialCalendarRecords)">Save</button>
+                </div>
+            </div>-->
+        </div>
+
+</div>
+
+<toaster-container toaster-options="{'position-class': 'toast-top-right', 'time-out': 10000, 'limit':1, 'close-button': true, 'toaster-id': 2}"></toaster-container>

@@ -1,0 +1,308 @@
+﻿
+        <p class="text-left red font-12"><u>***Please note, all dollar references are for Net US dollars.***</u></p>
+
+        <form class="form-inline">
+            <div class="row font-12">
+                <div class="form-group col-sm-6 text-right">
+                    <label class="red">2017 Guaranteed Rate Base (000):</label>
+                    <input type="number"
+                           class="form-control"
+                           ng-change="vm.earnedNetP4Cformula(); vm.earnedNetP4CBcpm(); vm.retailEarnedNetP4Cformula(); vm.retailEarnedNetP4CBcpm()"
+                           ng-model="vm.adTypeP4CnonBleed.RateTiers[0].RateEditionTypes[0].RateBaseCirculationGuarantee"
+                           id="rateBase" />
+                </div>
+            </div>
+
+            <div class="row font-12">
+                <div class="form-group col-sm-6 text-right">
+                    <label class="red">2017 NET P4C Open Rate:</label>
+                    <input type="number"
+                           class="form-control"
+                           ng-change="vm.openBleedFormula(); vm.retailOpenNetP4CBrate()"
+                           ng-model="vm.adTypeP4CnonBleed.RateTiers[0].RateEditionTypes[0].Rate"
+                           id="netP4CRate" />
+                </div>
+            </div>
+
+            <div class="row font-12">
+                <div class="form-group col-sm-6 text-right">
+                    <label class="red">2017 NET P4CB Open Rate:</label>
+                    <input type="number"
+                           class="form-control"
+                           ng-change="vm.openBleedFormula(); vm.retailOpenNetP4CBrate()"
+                           ng-model="vm.adTypeP4CB.RateTiers[0].RateEditionTypes[0].Rate"
+                           id="netP4CBRate" />
+                </div>
+            </div>
+        </form>
+
+        <br />
+
+        <div class="row font-12">
+            <div class="col-sm-8">
+                <p><b><u>Things to note regarding the L'Oréal USA Bleed Premium:</u></b></p>
+                <ul>
+                    <li>If your publication does charge for bleed from an open rates perspective, we expect you to waive bleed charges for L'Oréal USA.  If you agree, please enter 0% within the L'Oréal USA Bleed Premium section.</li>
+                    <li>If your publication will not agree to waive bleed charges but instead reduce them, please enter the adjusted bleed premium percentage in the L'Oréal USA Bleed Premium section.</li>
+                    <li>If your publication will not agree to waive or reduce bleed charges, then please ensure that the L'Oréal USA Bleed Premium that you enter matches the Open Bleed Premium.</li>
+                </ul>
+            </div>
+            <div class="col-sm-4">
+                <br />
+                <form>
+                    <label class="red">Open Bleed Premium (in %):</label>
+                    <div class="form-group">
+                        <input disabled
+                               type="text"
+                               ng-model="vm.parentP4C.BleedOpenPercentPremium"
+                               class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="red">L'Oréal USA Bleed Premium (in %):</label>
+                        <input type="number"
+                               ng-change="vm.earnedNetP4CBrate(); vm.retailEarnedNetP4CBrate(); vm.earnedNetP4CBcpm(); vm.retailEarnedNetP4CBcpm()"
+                               ng-model="vm.parentP4C.BleedEarnedPercentPremium"
+                               class="form-control">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!--Discount Structure Grid-->
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">(General) L'Oréal USA Discount Structure By Tier</div>
+                    <table class="table font-10">
+                        <thead>
+                            <tr>
+                                <th>Tier</th>
+                                <th>Tier Range</th>
+                                <th>Discount %</th>
+                                <th>Earned NET P4C Rate</th>
+                                <th>Earned NET P4CB Rate</th>
+                                <th>Earned NET P4C CPM</th>
+                                <th>Earned NET P4CB CPM</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="o in vm.adTypeP4CnonBleed.RateTiers"
+                                ng-if="vm.adTypeP4CnonBleed.RateTiers[$index].TierID!=0">
+                                <td>{{o.Tier}}</td>
+                                <td>{{o.TierRange}}</td>
+                                <!-- Discount % ((1 - Earned Net P4C Rate) / 2017 NET P4C Open Rate)-->
+                                <td>
+                                    <input disabled
+                                           value="{{((1 - vm.adTypeP4CnonBleed.RateTiers[$index].RateEditionTypes[0].Rate / vm.adTypeP4CnonBleed.RateTiers[0].RateEditionTypes[0].Rate) * 100).toFixed(2)}}%"
+                                           ng-if="vm.adTypeP4CnonBleed.RateTiers[$index].RateEditionTypes[0].Rate && vm.adTypeP4CnonBleed.RateTiers[0].RateEditionTypes[0].Rate" />
+                                </td>
+                                <!--Earned NET P4C Rate-->
+                                <td>
+                                    <input type="number"
+                                           ng-change="vm.earnedNetP4Cformula(); vm.earnedNetP4CBrate(); vm.earnedNetP4CBcpm()"
+                                           ng-model="vm.adTypeP4CnonBleed.RateTiers[$index].RateEditionTypes[0].Rate" />
+                                </td>
+
+                                <!--Earned NET P4CB Rate-->
+                                <!--<td>{{vm.adTypeP4CB.RateTiers[$index].RateEditionTypes[0].Rate | number: 1}}-->
+                                <td>
+                                    <input type="text"
+                                           disabled
+                                           ng-change="vm.earnedNetP4CBcpm()"
+                                           ng-false-value="vm.adTypeP4CB.RateTiers[$index].RateEditionTypes[0].Rate | number:0"
+                                           ng-model="vm.adTypeP4CB.RateTiers[$index].RateEditionTypes[0].Rate" />
+                                </td>
+
+                                <!-- Earned NET P4C CPM  -->
+                                <td>
+                                    <input type="text"
+                                           disabled
+                                           ng-model="vm.adTypeP4CnonBleed.RateTiers[$index].RateEditionTypes[0].CPM" />
+                                </td>
+                                <!-- Earned NET P4CB CPM -->
+                                <td>
+                                    <input type="text"
+                                           disabled
+                                           ng-model="vm.adTypeP4CB.RateTiers[$index].RateEditionTypes[0].CPM" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row font-12">
+            <div class="col-sm-6">
+                <p><b><u>Cover Premiums:</u></b></p>
+                <ul>
+                    <li>We expect all cover premiums to be waived for L'Oréal USA.  If you agree, please enter 0% in the L'Oréal USA Cover Premium fields.</li>
+                    <li>If your publication will not agree to waive cover premiums but instead reduce them, please enter the adjusted cover premium percentage in the L'Oréal USA Cover Premium fields.</li>
+                    <li>Please note, all covers must earn the L'Oréal USA discount, and the fields are set up to calculate the rates as such.</li>
+                </ul>
+            </div>
+
+            <!--Cover Premiums Grid-->
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">Cover Premium Table</div>
+                    <table class="table font-10">
+                        <thead>
+                            <tr>
+                                <th>Cover Type</th>
+                                <th>Open Cover Premium</th>
+                                <th>L'Oréal USA Cover Premium</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Cover 2</td>
+                                <td><input type="number" ng-model="vm.parentP4C.Cover2OpenPercentPremium" /></td>
+                                <td><input type="number" ng-model="vm.parentP4C.Cover2EarnedPercentPremium" /></td>
+                            </tr>
+                            <tr>
+                                <td>Cover 3</td>
+                                <td><input type="number" ng-model="vm.parentP4C.Cover3OpenPercentPremium" /></td>
+                                <td><input type="number" ng-model="vm.parentP4C.Cover3EarnedPercentPremium" /></td>
+                            </tr>
+                            <tr>
+                                <td>Cover 4</td>
+                                <td><input type="number" ng-model="vm.parentP4C.Cover4OpenPercentPremium" /></td>
+                                <td><input type="number" ng-model="vm.parentP4C.Cover4EarnedPercentPremium" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+        <br />
+        <div class="row font-12">
+            <div class="col-sm-8">
+                <p><b><u>Spread Discounts:</u></b></p>
+                <ul>
+                    <li>Spreads offer an opportunity for incremental incentive. Magazines do not have to create edit to face advertising and therefore we believe the pricing should reflect this savings.</li>
+                    <li>L'Oréal USA is looking for additional discounts to incentivize the Divisions to run spreads.  It is important to understand that the lack of spread discount may reduce your opportunity for spread business.</li>
+                    <li>Please indicate whether you will offer incentives for spread units by entering in the spread discount % in the L'Oréal USA Spread Discount field.</li>
+                    <li>Please note, we expect that the spread discount will apply to the entire spread, and the field is set up to calculate this as such.  Therefore, please be sure that the percentage that you enter reflects this.</li>
+                    <li>We expect that the spread discount will apply to Cover 2/Page 1 units.  If you are in agreement, please ensure that the L'Oréal USA Spread Discount for ROB and C2/P1 match each other.</li>
+                </ul>
+            </div>
+            <div class="col-sm-4">
+
+                <br />
+                <form>
+                    <div class="form-group">
+                        <label class="red">L'Oréal USA Spread Discount: ROB</label>
+                        <input type="number"
+                               ng-model="vm.parentP4C.SpreadROBEarnedPercentDiscount"
+                               class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="red">L'Oréal USA Spread Discount: Cover 2/Page 1</label>
+                        <input type="number"
+                               ng-model="vm.parentP4C.SpreadC2P1EarnedPercentDiscount"
+                               class="form-control">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-sm-5 font-12">
+                <p><b><u>Fractional Premiums</u></b></p>
+                <ul>
+                    <li>
+                        L'Oréal USA will not pay a premium for fractional units. Please confirm you are in agreement by entering 0% under the L'Oréal USA Fractional Premium field for the unit scenarios listed below.<br />
+                        If you do not agree to waive fractional premiums but will agree to reduce them, please ensure that the adjusted premium percentage is entered into the aforementioned field:
+                    </li>
+                </ul>
+            </div>
+
+            <!--Fractional Premium Grid-->
+            <div class="col-sm-7">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">Fraction Premiums Table</div>
+                    <table class="table font-10">
+                        <thead>
+                            <tr>
+                                <th>Fractional Premium Type</th>
+                                <th>Open Fractional Premium</th>
+                                <th>L'Oréal USA Fractional Premium</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1/3 Page Standalone</td>
+                                <td><input type="number" ng-model="vm.parentP4C.FracThirdPageOpenPercentPremium" /></td>
+                                <td><input type="number" ng-model="vm.parentP4C.FracThirdPageEarnedPercentPremium" /></td>
+                            </tr>
+                            <tr>
+                                <td>1/2 Page Standalone</td>
+                                <td><input type="number" ng-model="vm.parentP4C.FracHalfPageOpenPercentPremium" /></td>
+                                <td><input type="number" ng-model="vm.parentP4C.FracHalfPageEarnedPercentPremium" /></td>
+                            </tr>
+                            <tr>
+                                <td>1/3 Page Running Opposite Full Brand Page</td>
+                                <td><input type="number" ng-model="vm.parentP4C.FracThirdRunOppFBPOpenPercentPremium" /></td>
+                                <td><input type="number" ng-model="vm.parentP4C.FracThirdRunOppFBPEarnedPercentPremium" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <div class="row">
+            <div class="col-sm-6 font-12">
+                <p><b><u>Fifth Color Premiums:</u></b></p>
+                <ul>
+                    <li>We expect that all Fifth Color Premiums will be waived for L'Oréal USA.  If you agree, please enter $0 for the L'Oréal USA Fifth Color Premium fields.  If you do not agree, please complete these fields with the dollar amount charge.</li>
+                </ul>
+            </div>
+
+            <!-- fifth Colo Premium grid-->
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">Fifth Color Premiums Table</div>
+                    <table class="table font-10">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Open Fifth Color Premium (Net $)</th>
+                                <th>L'Oréal USA Fifth Color Premium (Net $)</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Metallic</td>
+                                <td><input type="number" ng-model="vm.parentP4C.FifthColorMetallicOpenDollarPremium" /></td>
+                                <td><input type="number" ng-model="vm.parentP4C.FifthColorMetallicEarnedDollarPremium" /></td>
+                            </tr>
+                            <tr>
+                                <td>Match</td>
+                                <td><input type="number" ng-model="vm.parentP4C.FifthColorMatchOpenDollarPremium" /></td>
+                                <td><input type="number" ng-model="vm.parentP4C.FifthColorMatchEarnedDollarPremium" /></td>
+                            </tr>
+                            <tr>
+                                <td>PMS</td>
+                                <td><input type="number" ng-model="vm.parentP4C.FifthColorPMSOpenDollarPremium" /></td>
+                                <td><input type="number" ng-model="vm.parentP4C.FifthColorPMSEarnedDollarPremium" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>

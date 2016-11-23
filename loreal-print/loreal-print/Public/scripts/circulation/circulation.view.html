@@ -1,0 +1,64 @@
+﻿<h1 class="text-center"><u>1st Half 2016 Circulation</u></h1>
+
+<div class="container-fluid">
+    <div ng-repeat="table in vm.circ.CirculationGroups">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="panel-title table-title">
+                    <div class="pull-left">{{table.CirculationTable}}</div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-8">
+                            <table class="table table-striped table-condensed table-bordered table-hover font-11">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Print</th>
+                                        <th>Digital Replica</th>
+                                        <th>Digital Non-Replica</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="record in table.CirculationContents">
+                                        <td>{{record.CirculationSubType}}</td>
+                                        <td>
+                                            <input type="number"
+                                                   ng-change="vm.getCircAnswers(record)"
+                                                   ng-model="vm.circ.CirculationGroups[$parent.$index].CirculationContents[$index].PrintCirculation" />
+                                        </td>
+                                        <td>
+                                            <input type="number"
+                                                   ng-change="vm.getCircAnswers(record)"
+                                                   ng-model="vm.circ.CirculationGroups[$parent.$index].CirculationContents[$index].DigitalReplicaCirculation" />
+                                        </td>
+                                        <td>
+                                            <input type="number"
+                                                   ng-change="vm.getCircAnswers(record)"
+                                                   ng-model="vm.circ.CirculationGroups[$parent.$index].CirculationContents[$index].DigitalNonReplicaCirculation" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="pull-right table-button">
+                        <button class="btn-primary btn-sm"
+                                type="submit"
+                                ng-click="vm.saveCircAnswers()"
+                                ng-disabled="vm.isTimingOut">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="80ad270105214b1e9154602d7d3e4a42" Name="Diagram1" ZoomLevel="75">
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.AdType" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.BookToRateType" Width="1.5" PointX="5.25" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.EditionType" Width="1.5" PointX="6" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.Genre" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.ParentAdType" Width="1.5" PointX="3.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.Publisher" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.RateType" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.Tier" Width="1.5" PointX="5.25" PointY="22.625" IsExpanded="true" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_AdType_To_ParentAdType_Year_ParentAdTypeID" ManuallyRouted="false" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_BookToRateType_To_RateType_Year_RateTypeID" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.CirculationGuarantee" Width="2" PointX="8.375" PointY="6.625" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_CirculationGuarantee_To_Book_Year_BookID" />    
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_CirculationGuarantee_To_EditionType_Year_EditionTypeID" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_CirculationGuarantee_To_ParentAdType_Year_ParentAdTypeID" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.V_Tier" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.V_TierByParentAdType" Width="2.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.Circulation" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.TabletRate" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.EditorialCalendar" Width="1.5" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.ProductionCostNEP" Width="1.5" PointX="11.25" PointY="6.625" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_ProductionCostNEP_To_AdType_Year_AdTypeID" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_ProductionCostNEP_To_EditionType_Year_EditionTypeID" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.PremiumDiscountRate" Width="1.5" PointX="8.375" PointY="10.75" />
+        <EntityTypeShape EntityType="Loreal_DEVRatesModel.Rate" Width="1.5" PointX="11.25" PointY="12.75" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_Rate_To_AdType_Year_AdTypeID" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_Rate_To_EditionType_Year_EditionTypeID" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_Rate_To_RateType_Year_RateTypeID" />
+        <AssociationConnector Association="Loreal_DEVRatesModel.FK_Rate_To_Tier_Year_BookID_TierID" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
